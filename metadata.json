@@ -1,0 +1,6 @@
+{
+  "name": "Ride Factory - Atelier & Garage Moto Mons",
+  "description": "Atelier moto spécialisé Enduro, Trail, Motocross et Adventure à Mons en Belgique. Entretien, réparation, pneumatiques bib mousse, préparation et shop.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
