@@ -1,4 +1,9 @@
 import { Motorbike } from './types';
+import ktmImg from '../assets/images/ktm_300_exc_enduro_1792762726710.jpg';
+import husqvarnaImg from '../assets/images/husqvarna_701_rally_1792762749903.jpg';
+import tenereImg from '../assets/images/tenere_700_rally_1792762748528.jpg';
+import gasgasImg from '../assets/images/gasgas_ec_enduro_1792762764004.jpg';
+import betaImg from '../assets/images/beta_rr_racing_1792762764429.jpg';
 
 export const MOTORBIKES_DATA: Motorbike[] = [
   {
@@ -12,7 +17,7 @@ export const MOTORBIKES_DATA: Motorbike[] = [
     category: 'Enduro',
     condition: 'Occasion Révisée',
     status: 'disponible',
-    imageUrl: 'https://images.unsplash.com/photo-1558981403-c5f9899a28bc?auto=format&fit=crop&w=1200&q=80',
+    imageUrl: ktmImg,
     highlightBadge: 'Coup de Cœur Atelier',
     description: 'Modèle Hardenduro officiel révisé à 100% dans notre atelier. Injection TBI parfaitement réglée, suspensions WP XACT à cartouche fermée revalvées.',
     keyFeatures: [
@@ -35,7 +40,7 @@ export const MOTORBIKES_DATA: Motorbike[] = [
     category: 'Trail',
     condition: 'Préparée Atelier',
     status: 'disponible',
-    imageUrl: 'https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?auto=format&fit=crop&w=1200&q=80',
+    imageUrl: husqvarnaImg,
     highlightBadge: 'Projet Rallye Raid',
     description: 'Une véritable arme de voyage tout-terrain et rallye raid. Équipée d\'une tour de navigation légère, suspensions WP XPLOR recalibrées et réservoir auxiliaire.',
     keyFeatures: [
@@ -58,7 +63,7 @@ export const MOTORBIKES_DATA: Motorbike[] = [
     category: 'Adventure',
     condition: 'Occasion Révisée',
     status: 'reservee',
-    imageUrl: 'https://images.unsplash.com/photo-1571188654248-7a89213915f7?auto=format&fit=crop&w=1200&q=80',
+    imageUrl: tenereImg,
     highlightBadge: 'Option en cours',
     description: 'Coloris Heritage Racing bleu emblématique. Moteur CP2 réputé indestructible, premier entretien des 1000 km effectué dans les règles de l\'art chez Ride Factory.',
     keyFeatures: [
@@ -81,7 +86,7 @@ export const MOTORBIKES_DATA: Motorbike[] = [
     category: 'Enduro',
     condition: 'Occasion Révisée',
     status: 'disponible',
-    imageUrl: 'https://images.unsplash.com/photo-1609630875171-b1321377ee65?auto=format&fit=crop&w=1200&q=80',
+    imageUrl: gasgasImg,
     highlightBadge: 'Sortie Atelier',
     description: 'L\'équilibre parfait entre la maniabilité d\'une 250 et le couple d\'une 450. Machine d\'un pilote amateur méticuleux, lavée et graissée après chaque sortie.',
     keyFeatures: [
@@ -104,7 +109,7 @@ export const MOTORBIKES_DATA: Motorbike[] = [
     category: 'Enduro',
     condition: 'Neuf',
     status: 'disponible',
-    imageUrl: 'https://images.unsplash.com/photo-1558981408-db0ecd8a1ee4?auto=format&fit=crop&w=1200&q=80',
+    imageUrl: betaImg,
     highlightBadge: 'Véhicule Neuf',
     description: 'Version Racing haut de gamme neuve avec la prestigieuse fourche KYB AOS à cartouche fermée de 48mm et amortisseur arrière KYB développé pour la compétition.',
     keyFeatures: [
@@ -127,7 +132,7 @@ export const MOTORBIKES_DATA: Motorbike[] = [
     category: 'Motocross',
     condition: 'Occasion Révisée',
     status: 'vendue',
-    imageUrl: 'https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?auto=format&fit=crop&w=1200&q=80',
+    imageUrl: ktmImg,
     highlightBadge: 'Vendue par Ride Factory',
     description: 'Piste et cross pur. Moteur puissant et ultra-réactif avec contrôle de traction HSTC et 3 cartographies moteur au guidon. Jamais couru en championnat boueux.',
     keyFeatures: [

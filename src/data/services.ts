@@ -1,4 +1,8 @@
 import { ServiceItem } from './types';
+import engineImg from '../assets/images/engine_preparation_detail_1791293915497.jpg';
+import heroWorkshopImg from '../assets/images/hero_enduro_workshop_1791293882530.jpg';
+import dirtActionImg from '../assets/images/dirt_offroad_action_1791293893287.jpg';
+import tiresMousseImg from '../assets/images/workshop_tires_mousse_1791293904780.jpg';
 
 export const SERVICES_DATA: ServiceItem[] = [
   {
@@ -18,7 +22,7 @@ export const SERVICES_DATA: ServiceItem[] = [
     fullDescription: 'Un moteur entretenu avec précision ne vous laisse jamais en carafe au milieu des bois ou au fond d\'une ornière. Chez Ride Factory, chaque entretien respecte un protocole strict de vérification en 32 points, avec traçabilité complète des pièces et des fluides utilisés.',
     leadTime: '24h à 48h sur rendez-vous',
     recommendedFor: ['Enduro 2T & 4T', 'Trail & Maxi-Trail', 'Motocross', 'Routière'],
-    image: '/src/assets/images/engine_preparation_detail_1791293915497.jpg',
+    image: engineImg,
   },
   {
     id: 'reparation',
@@ -36,7 +40,7 @@ export const SERVICES_DATA: ServiceItem[] = [
     fullDescription: 'Une fuite de spy, une boîte qui accroche, un jeu anormal ou une perte de compression : nous diagnostiquons la cause réelle avant de remplacer quoi que ce soit. Nous travaillons avec outillage spécialisé et pièces d\'origine ou renforcées pour garantir la fiabilité.',
     leadTime: 'Sur devis après diagnostic',
     recommendedFor: ['Toutes cylindrées', 'Motos accidentées', 'Remise en état après saison'],
-    image: '/src/assets/images/hero_enduro_workshop_1791293882530.jpg',
+    image: heroWorkshopImg,
   },
   {
     id: 'preparation',
@@ -52,7 +56,7 @@ export const SERVICES_DATA: ServiceItem[] = [
     fullDescription: 'Une moto de série est un compromis d\'usine. Notre atelier adapte votre machine à votre gabarit, votre discipline et votre niveau de pilotage. Nous calibrons les suspensions en fonction de votre poids avec équipement complet pour une motricité absolue.',
     leadTime: '3 à 7 jours ouvrés selon package',
     recommendedFor: ['Enduro Extrême', 'Rallye Raid', 'Bivouac Trail', 'Motocross FMB'],
-    image: '/src/assets/images/dirt_offroad_action_1791293893287.jpg',
+    image: dirtActionImg,
   },
   {
     id: 'pneumatiques',
@@ -70,6 +74,6 @@ export const SERVICES_DATA: ServiceItem[] = [
     fullDescription: 'Monter un bib mousse neuf ou un pneu gomme tendre sans abîmer les tringles ni pincer requiert un coup de main précis et une monteuse professionnelle adaptée. Nous stockons les marques de référence pour vous faire repartir avec la pression ou la fermeté idéale pour le terrain.',
     leadTime: 'Montage express (30-45 min sur rendez-vous)',
     recommendedFor: ['Michelin Bib Mousse', 'Hard Enduro Gummy', 'Adventure Tubeless'],
-    image: '/src/assets/images/workshop_tires_mousse_1791293904780.jpg',
+    image: tiresMousseImg,
   },
 ];

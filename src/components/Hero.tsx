@@ -1,4 +1,5 @@
 import { ArrowRight, Wrench, ShieldCheck, MapPin } from 'lucide-react';
+import heroEnduroImg from '../assets/images/hero_enduro_workshop_1791293882530.jpg';
 
 interface HeroProps {
   onOpenBooking: () => void;
@@ -11,9 +12,12 @@ export function Hero({ onOpenBooking, onScrollToAtelier }: HeroProps) {
       {/* Background Image with Cinematic Dark Scrim */}
       <div className="absolute inset-0 z-0 select-none">
         <img
-          src="/src/assets/images/hero_enduro_workshop_1791293882530.jpg"
+          src={heroEnduroImg}
           alt="Atelier moto Ride Factory à Mons - Préparation et mécanique enduro"
           referrerPolicy="no-referrer"
+          onError={(e) => {
+            (e.target as HTMLImageElement).src = '/images/hero_enduro_workshop.jpg';
+          }}
           className="w-full h-full object-cover object-center filter brightness-[0.62] contrast-[1.12]"
         />
         {/* Scrims & industrial lighting atmosphere */}

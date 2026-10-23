@@ -28,12 +28,12 @@ interface BikesViewProps {
   onNavigate?: (view: string, sectionId?: string) => void;
 }
 
-const STORAGE_KEY = 'ride_factory_motorbikes_catalog_v2';
+const STORAGE_KEY = 'ride_factory_motorbikes_catalog_v3';
 const ADMIN_AUTH_KEY = 'ride_factory_admin_auth';
 const ADMIN_PASSWORD = 'Ride_F10';
 
 export function BikesView({ onOpenBookingForBike, onNavigateHome, onNavigate }: BikesViewProps) {
-  // Bikes catalogue state with localStorage persistence
+  // Bikes catalogue state with localStorage persistence (v3 with local high-res assets)
   const [bikes, setBikes] = useState<Motorbike[]>(() => {
     try {
       const stored = localStorage.getItem(STORAGE_KEY);
@@ -452,12 +452,12 @@ export function BikesView({ onOpenBookingForBike, onNavigateHome, onNavigate }: 
                       <img
                         src={bike.imageUrl}
                         alt={`${bike.brand} ${bike.model}`}
+                        referrerPolicy="no-referrer"
                         className={`w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 ${
                           isSold ? 'grayscale opacity-60' : ''
                         }`}
                         onError={(e) => {
-                          (e.target as HTMLImageElement).src =
-                            'https://images.unsplash.com/photo-1558981403-c5f9899a28bc?auto=format&fit=crop&w=1200&q=80';
+                          (e.target as HTMLImageElement).src = '/images/bikes/ktm_300_exc.jpg';
                         }}
                       />
                     ) : (
@@ -672,6 +672,10 @@ export function BikesView({ onOpenBookingForBike, onNavigateHome, onNavigate }: 
                   <img
                     src={selectedBike.imageUrl}
                     alt={`${selectedBike.brand} ${selectedBike.model}`}
+                    referrerPolicy="no-referrer"
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).src = '/images/bikes/ktm_300_exc.jpg';
+                    }}
                     className="w-full h-full object-cover"
                   />
                 </div>

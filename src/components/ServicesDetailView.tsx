@@ -149,6 +149,9 @@ export function ServicesDetailView({ onSelectServiceForBooking, onNavigateHome, 
               src={currentService.image}
               alt={currentService.title}
               referrerPolicy="no-referrer"
+              onError={(e) => {
+                (e.target as HTMLImageElement).src = '/images/engine_preparation_detail.jpg';
+              }}
               className="w-full h-full object-cover object-center filter contrast-110"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-[#111111] via-transparent to-transparent" />

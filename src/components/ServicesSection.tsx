@@ -47,6 +47,9 @@ export function ServicesSection({ onSelectServiceForBooking }: ServicesSectionPr
                   src={service.image}
                   alt={`Service ${service.title} - Ride Factory Mons`}
                   referrerPolicy="no-referrer"
+                  onError={(e) => {
+                    (e.target as HTMLImageElement).src = '/images/hero_enduro_workshop.jpg';
+                  }}
                   className="w-full h-full object-cover object-center filter grayscale-[30%] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-500"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#111111] via-[#111111]/40 to-transparent" />

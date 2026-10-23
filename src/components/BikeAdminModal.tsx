@@ -10,11 +10,11 @@ interface BikeAdminModalProps {
 }
 
 const PRESET_IMAGES = [
-  { label: 'Enduro KTM Orange', url: 'https://images.unsplash.com/photo-1558981403-c5f9899a28bc?auto=format&fit=crop&w=1200&q=80' },
-  { label: 'Trail / Expedition Blanc', url: 'https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?auto=format&fit=crop&w=1200&q=80' },
-  { label: 'Adventure Ténéré', url: 'https://images.unsplash.com/photo-1571188654248-7a89213915f7?auto=format&fit=crop&w=1200&q=80' },
-  { label: 'Cross Rouge', url: 'https://images.unsplash.com/photo-1609630875171-b1321377ee65?auto=format&fit=crop&w=1200&q=80' },
-  { label: 'Beta / Racing 2T', url: 'https://images.unsplash.com/photo-1558981408-db0ecd8a1ee4?auto=format&fit=crop&w=1200&q=80' },
+  { label: 'Enduro KTM Orange', url: '/images/bikes/ktm_300_exc.jpg' },
+  { label: 'Trail / Expédition Husqvarna', url: '/images/bikes/husqvarna_701.jpg' },
+  { label: 'Adventure Ténéré 700', url: '/images/bikes/tenere_700.jpg' },
+  { label: 'Enduro GASGAS 350F Rouge', url: '/images/bikes/gasgas_350f.jpg' },
+  { label: 'Beta 300 Racing 2T', url: '/images/bikes/beta_300_rr.jpg' },
 ];
 
 export function BikeAdminModal({
@@ -62,7 +62,7 @@ export function BikeAdminModal({
         category: 'Enduro',
         condition: 'Occasion Révisée',
         status: 'disponible',
-        imageUrl: 'https://images.unsplash.com/photo-1558981403-c5f9899a28bc?auto=format&fit=crop&w=1200&q=80',
+        imageUrl: '/images/bikes/ktm_300_exc.jpg',
         description: 'Moto entièrement contrôlée et révisée par l’atelier Ride Factory à Mons. Prête à rouler.',
         keyFeatures: [
           'Entretien complet à jour',
@@ -134,7 +134,7 @@ export function BikeAdminModal({
       category: formData.category || 'Enduro',
       condition: formData.condition || 'Occasion Révisée',
       status: formData.status || 'disponible',
-      imageUrl: formData.imageUrl || 'https://images.unsplash.com/photo-1558981403-c5f9899a28bc?auto=format&fit=crop&w=1200&q=80',
+      imageUrl: formData.imageUrl || '/images/bikes/ktm_300_exc.jpg',
       description: formData.description || 'Moto sélectionnée et révisée par Ride Factory Mons.',
       keyFeatures: formData.keyFeatures && formData.keyFeatures.length > 0
         ? formData.keyFeatures
@@ -433,9 +433,10 @@ export function BikeAdminModal({
                     <img
                       src={formData.imageUrl}
                       alt="Aperçu moto"
+                      referrerPolicy="no-referrer"
                       className="w-full h-full object-cover"
                       onError={(e) => {
-                        (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1558981403-c5f9899a28bc?auto=format&fit=crop&w=1200&q=80';
+                        (e.target as HTMLImageElement).src = '/images/bikes/ktm_300_exc.jpg';
                       }}
                     />
                   ) : (

@@ -1,3 +1,5 @@
+import dirtOffroadImg from '../assets/images/dirt_offroad_action_1791293893287.jpg';
+
 interface SpecialistOffroadSectionProps {
   onOpenBooking: () => void;
 }
@@ -8,9 +10,12 @@ export function SpecialistOffroadSection({ onOpenBooking }: SpecialistOffroadSec
       {/* Full width dramatic photo */}
       <div className="absolute inset-0 z-0">
         <img
-          src="/src/assets/images/dirt_offroad_action_1791293893287.jpg"
+          src={dirtOffroadImg}
           alt="Enduro et tout-terrain - Ride Factory Mons"
           referrerPolicy="no-referrer"
+          onError={(e) => {
+            (e.target as HTMLImageElement).src = '/images/dirt_offroad_action.jpg';
+          }}
           className="w-full h-full object-cover object-center filter contrast-[1.15] brightness-[0.55]"
         />
         {/* Scrim */}
