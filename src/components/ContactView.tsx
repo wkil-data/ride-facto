@@ -1,25 +1,22 @@
 import { useState } from 'react';
-import { MapPin, Clock, Phone, Mail, Navigation, Send, CheckCircle2, ArrowLeft, Calendar, FileCode, Upload, AlertCircle } from 'lucide-react';
+import { Navigation, CheckCircle2, ArrowLeft, AlertCircle } from 'lucide-react';
 import { AppointmentFormData } from '../data/types';
 
 interface ContactViewProps {
-  onOpenBooking: () => void;
   onNavigateHome: () => void;
-  onNavigate?: (view: string, sectionId?: string) => void;
 }
 
-export function ContactView({ onOpenBooking, onNavigateHome, onNavigate }: ContactViewProps) {
+export function ContactView({ onNavigateHome }: ContactViewProps) {
   const [activeTab, setActiveTab] = useState<'rdv' | 'message'>('rdv');
   const [sentMessage, setSentMessage] = useState(false);
   const [messageForm, setMessageForm] = useState({
     name: '',
     email: '',
     phone: '',
-    subject: 'Demande d\'information',
+    subject: "Demande d'information",
     message: '',
   });
 
-  // Dedicated in-page appointment state
   const [bookingData, setBookingData] = useState<AppointmentFormData>({
     nom: '',
     prenom: '',
@@ -37,7 +34,6 @@ export function ContactView({ onOpenBooking, onNavigateHome, onNavigate }: Conta
   });
   const [bookingSubmitted, setBookingSubmitted] = useState(false);
   const [bookingError, setBookingError] = useState('');
-  const [showOdoo, setShowOdoo] = useState(false);
 
   const handleMessageSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -58,180 +54,125 @@ export function ContactView({ onOpenBooking, onNavigateHome, onNavigate }: Conta
   const openWazeUrl = 'https://waze.com/ul?q=Petite%20Rue%20des%20Pr%C3%A9s%201%207000%20Mons';
 
   return (
-    <div className="pt-28 pb-24 bg-[#080808] min-h-screen">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Navigation Breadcrumb & Back to Home Button */}
-        <div className="flex items-center justify-between pb-6 mb-6 border-b border-[#1A1A1A]">
+    <div className="pt-28 pb-24 bg-[#FAFAF8] min-h-screen">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="mb-8">
           <button
             onClick={onNavigateHome}
-            className="inline-flex items-center gap-2 px-4 py-2 bg-[#111111] hover:bg-[#1A1A1A] text-[#F5F5F2] hover:text-[#FF6600] border border-[#222222] text-xs font-mono font-bold uppercase transition-colors cursor-pointer"
+            className="inline-flex items-center gap-2 text-sm font-medium text-[#6E6D6A] hover:text-[#141413] transition-colors cursor-pointer"
           >
-            <ArrowLeft className="w-4 h-4 text-[#FF6600]" />
-            <span>← RETOUR À LA PAGE D'ACCUEIL</span>
+            <ArrowLeft className="w-4 h-4" />
+            <span>Retour à l’accueil</span>
           </button>
-
-          <span className="text-xs font-mono text-[#A3A3A3] hidden sm:inline">
-            Atelier Ride Factory · Petite Rue des Prés 1, 7000 Mons
-          </span>
         </div>
 
-        {/* Quick Page Navigation Menu at the Top */}
-        {onNavigate && (
-          <div className="bg-[#111111] border border-[#1A1A1A] p-2.5 mb-8 flex flex-wrap items-center justify-between gap-2">
-            <span className="text-[11px] font-mono text-[#737373] uppercase px-2 hidden lg:inline">ACCÈS DIRECT AUX AUTRES PAGES DU SITE :</span>
-            <div className="flex flex-wrap items-center gap-1.5 w-full lg:w-auto">
-              {[
-                { label: 'ACCUEIL', view: 'home' },
-                { label: "L'ATELIER", view: 'home', sectionId: 'atelier' },
-                { label: 'SERVICES', view: 'services' },
-                { label: 'PNEUS & BIBS', view: 'pneus' },
-                { label: 'MOTOS À VENDRE', view: 'motos' },
-                { label: 'BLOG & GUIDES', view: 'blog' },
-              ].map((link) => (
-                <button
-                  key={link.label}
-                  onClick={() => onNavigate(link.view, link.sectionId)}
-                  className="px-3 py-1.5 bg-[#161616] hover:bg-[#FF6600] text-[#A3A3A3] hover:text-[#080808] border border-[#222222] text-xs font-heading font-bold uppercase tracking-wider transition-colors cursor-pointer"
-                >
-                  {link.label}
-                </button>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* Section Header */}
-        <div className="pb-8 border-b border-[#1A1A1A] mb-10">
-          <div className="flex items-center gap-2 text-xs font-mono text-[#FF6600] uppercase tracking-widest mb-2">
-            <span className="w-2 h-0.5 bg-[#FF6600]" />
-            <span>ATELIER & COORDONNÉES</span>
-          </div>
-          <h1 className="font-heading font-black text-5xl sm:text-7xl text-[#F5F5F2] uppercase tracking-tight">
-            CONTACT & RENDEZ-VOUS
+        <div className="max-w-2xl mb-12">
+          <p className="text-sm font-medium text-[#FF5A00] mb-3">
+            Contact & Atelier
+          </p>
+          <h1
+            className="font-heading font-extrabold text-[#141413] tracking-tight leading-[1.08] mb-4"
+            style={{ fontSize: 'clamp(2.25rem, 4vw, 3.5rem)', textWrap: 'balance' }}
+          >
+            Prendre rendez-vous à Mons.
           </h1>
-          <p className="text-sm sm:text-base text-[#A3A3A3] mt-2 max-w-xl">
-            Prenez rendez-vous directement pour votre moto ou contactez notre équipe technique pour un conseil ou une disponibilité pièce.
+          <p className="text-base text-[#6E6D6A] leading-relaxed">
+            Planifiez l’entretien de votre moto ou posez-nous directement vos questions techniques.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
-          {/* Left Column: Coordinates & Map Access */}
-          <div className="lg:col-span-5 bg-[#111111] border border-[#1A1A1A] p-6 sm:p-8 space-y-6 flex flex-col justify-between">
-            <div className="space-y-6">
-              <div className="border-b border-[#1A1A1A] pb-4">
-                <span className="text-[11px] font-mono text-[#FF6600] uppercase tracking-widest block mb-1">
-                  ATELIER OFFICIEL
-                </span>
-                <h2 className="font-heading font-black text-3xl text-[#F5F5F2] uppercase">
-                  RIDE FACTORY MONS
-                </h2>
-                <div className="text-xs font-mono text-[#737373] mt-1">
-                  GARAGE & ATELIER MOTO TOUT-TERRAIN
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+          {/* Left Column: Clean Atelier Coordinates */}
+          <div className="lg:col-span-5 space-y-8">
+            <div className="divide-y divide-[#E6E4DE] border-y border-[#E6E4DE] text-sm">
+              <div className="py-4 flex justify-between gap-4">
+                <span className="text-[#6E6D6A]">Adresse</span>
+                <div className="text-right">
+                  <div className="font-medium text-[#141413]">Petite Rue des Prés 1</div>
+                  <div className="text-xs text-[#6E6D6A] mt-0.5">7000 Mons, Belgique</div>
                 </div>
               </div>
-
-              <div className="space-y-4 text-xs font-mono">
-                <div className="flex items-start gap-3">
-                  <MapPin className="w-4 h-4 text-[#FF6600] shrink-0 mt-0.5" />
-                  <div>
-                    <div className="font-heading font-bold text-base text-[#F5F5F2]">Petite Rue des Prés 1</div>
-                    <div className="text-[#A3A3A3] text-xs mt-0.5">7000 Mons, Belgique</div>
-                    <div className="text-[11px] text-[#737373] mt-0.5">Accès camionnette / remorque aisé</div>
-                  </div>
+              <div className="py-4 flex justify-between gap-4">
+                <span className="text-[#6E6D6A]">Horaires</span>
+                <div className="text-right">
+                  <div className="font-medium text-[#141413] tabular-nums">Lun – Sam · 09:00 – 18:00</div>
+                  <div className="text-xs text-[#6E6D6A] mt-0.5">Dimanche fermé</div>
                 </div>
-
-                <div className="flex items-start gap-3">
-                  <Clock className="w-4 h-4 text-[#FF6600] shrink-0 mt-0.5" />
-                  <div>
-                    <div className="text-[#F5F5F2] font-bold">LUNDI — SAMEDI</div>
-                    <div className="text-[#FF6600] font-bold">09:00 — 18:00 non-stop</div>
-                    <div className="text-[#737373] mt-0.5">Dimanche fermé</div>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-3">
-                  <Phone className="w-4 h-4 text-[#FF6600] shrink-0 mt-0.5" />
-                  <div>
-                    <div className="text-[#F5F5F2] font-bold">TÉLÉPHONE ATELIER</div>
-                    <a href="tel:+32470556696" className="text-[#F5F5F2] hover:text-[#FF6600] font-semibold">
-                      0470/55.66.96
-                    </a>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-3">
-                  <Mail className="w-4 h-4 text-[#FF6600] shrink-0 mt-0.5" />
-                  <div>
-                    <div className="text-[#F5F5F2] font-bold">EMAIL ATELIER</div>
-                    <a href="mailto:contact@ridefactory.be" className="text-[#A3A3A3] hover:text-[#FF6600]">
-                      contact@ridefactory.be
-                    </a>
-                  </div>
-                </div>
+              </div>
+              <div className="py-4 flex justify-between gap-4">
+                <span className="text-[#6E6D6A]">Téléphone</span>
+                <a href="tel:+32470556696" className="font-mono font-medium text-[#141413] hover:text-[#FF5A00] tabular-nums">
+                  0470/55.66.96
+                </a>
+              </div>
+              <div className="py-4 flex justify-between gap-4">
+                <span className="text-[#6E6D6A]">Email</span>
+                <a href="mailto:info@ride-factory.be" className="font-medium text-[#141413] hover:text-[#FF5A00] transition-colors">
+                  info@ride-factory.be
+                </a>
               </div>
             </div>
 
-            <div className="pt-6 border-t border-[#1A1A1A] space-y-3">
+            <div className="flex flex-wrap gap-3">
               <a
                 href={addressUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full py-3 bg-[#1A1A1A] hover:bg-[#222222] border border-[#262626] text-[#F5F5F2] font-heading font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-colors"
+                className="inline-flex items-center gap-2 px-4 py-2.5 bg-white border border-[#E6E4DE] hover:border-[#141413] text-[#141413] text-sm font-medium rounded-lg transition-colors"
               >
-                <Navigation className="w-3.5 h-3.5 text-[#FF6600]" />
-                <span>ITINÉRAIRE GOOGLE MAPS</span>
+                <Navigation className="w-3.5 h-3.5 text-[#FF5A00]" />
+                <span>Google Maps</span>
               </a>
 
               <a
                 href={openWazeUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full py-2.5 bg-[#141414] hover:bg-[#1c1c1c] border border-[#222222] text-[#A3A3A3] hover:text-[#F5F5F2] font-heading font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-colors"
+                className="inline-flex items-center gap-2 px-4 py-2.5 bg-white border border-[#E6E4DE] hover:border-[#141413] text-[#141413] text-sm font-medium rounded-lg transition-colors"
               >
-                <span>OUVRIR DANS WAZE</span>
+                <span>Waze</span>
               </a>
             </div>
           </div>
 
-          {/* Right Column: In-page Form with Tabs */}
-          <div className="lg:col-span-7 bg-[#111111] border border-[#1A1A1A] p-6 sm:p-8">
-            {/* Form Selection Tabs */}
-            <div className="flex items-center gap-2 pb-4 mb-6 border-b border-[#1A1A1A]">
+          {/* Right Column: Clean Form Card */}
+          <div className="lg:col-span-7 bg-white border border-[#E6E4DE] rounded-2xl p-6 sm:p-10">
+            {/* Segmented Mode Tabs */}
+            <div className="inline-flex p-1 bg-[#F2F1ED] rounded-xl mb-8 w-full sm:w-auto">
               <button
                 type="button"
                 onClick={() => setActiveTab('rdv')}
-                className={`flex-1 py-3 px-4 font-heading font-black text-xs uppercase tracking-wider transition-colors border cursor-pointer ${
+                className={`flex-1 sm:flex-none px-5 py-2 text-sm font-medium rounded-lg transition-colors cursor-pointer ${
                   activeTab === 'rdv'
-                    ? 'bg-[#FF6600] text-[#080808] border-[#FF6600]'
-                    : 'bg-[#0c0c0c] text-[#A3A3A3] border-[#222222] hover:text-[#F5F5F2]'
+                    ? 'bg-white text-[#141413] shadow-xs'
+                    : 'text-[#6E6D6A] hover:text-[#141413]'
                 }`}
               >
-                1. PRENDRE RENDEZ-VOUS ATELIER
+                Demande de rendez-vous
               </button>
               <button
                 type="button"
                 onClick={() => setActiveTab('message')}
-                className={`flex-1 py-3 px-4 font-heading font-black text-xs uppercase tracking-wider transition-colors border cursor-pointer ${
+                className={`flex-1 sm:flex-none px-5 py-2 text-sm font-medium rounded-lg transition-colors cursor-pointer ${
                   activeTab === 'message'
-                    ? 'bg-[#FF6600] text-[#080808] border-[#FF6600]'
-                    : 'bg-[#0c0c0c] text-[#A3A3A3] border-[#222222] hover:text-[#F5F5F2]'
+                    ? 'bg-white text-[#141413] shadow-xs'
+                    : 'text-[#6E6D6A] hover:text-[#141413]'
                 }`}
               >
-                2. SIMPLE MESSAGE / RENSEIGNEMENT
+                Simple message
               </button>
             </div>
 
-            {/* TAB 1: FULL IN-PAGE APPOINTMENT FORM */}
             {activeTab === 'rdv' && (
               <div>
                 {bookingSubmitted ? (
-                  <div className="py-8 text-center space-y-4 bg-[#080808] border border-[#1A1A1A] p-6">
-                    <CheckCircle2 className="w-12 h-12 text-[#FF6600] mx-auto" />
-                    <h3 className="font-heading font-black text-3xl text-[#F5F5F2] uppercase">
-                      DEMANDE DE RENDEZ-VOUS TRANSMISE
+                  <div className="py-10 text-center space-y-4">
+                    <CheckCircle2 className="w-10 h-10 text-[#FF5A00] mx-auto" />
+                    <h3 className="font-heading font-bold text-2xl text-[#141413]">
+                      Demande transmise
                     </h3>
-                    <p className="text-xs text-[#A3A3A3] max-w-md mx-auto leading-relaxed">
-                      Merci <strong className="text-[#F5F5F2]">{bookingData.prenom} {bookingData.nom}</strong>. Votre demande pour votre <strong className="text-[#F5F5F2]">{bookingData.motoMarque} {bookingData.motoModele}</strong> est bien enregistrée. Nous vous contactons rapidement au {bookingData.telephone}.
+                    <p className="text-sm text-[#6E6D6A] max-w-md mx-auto leading-relaxed">
+                      Merci <strong className="text-[#141413]">{bookingData.prenom} {bookingData.nom}</strong>. Votre demande pour votre <strong className="text-[#141413]">{bookingData.motoMarque} {bookingData.motoModele}</strong> est enregistrée. Nous vous recontactons rapidement au {bookingData.telephone}.
                     </p>
                     <div className="pt-4 flex flex-wrap justify-center gap-3">
                       <button
@@ -253,31 +194,30 @@ export function ContactView({ onOpenBooking, onNavigateHome, onNavigate }: Conta
                             photos: [],
                           });
                         }}
-                        className="px-4 py-2 bg-[#1A1A1A] hover:bg-[#222222] text-[#F5F5F2] text-xs font-mono"
+                        className="px-4 py-2 bg-[#F2F1ED] hover:bg-[#E6E4DE] text-[#141413] text-sm font-medium rounded-lg cursor-pointer"
                       >
                         Nouvelle demande
                       </button>
                       <button
                         onClick={onNavigateHome}
-                        className="px-6 py-2 bg-[#FF6600] text-[#080808] font-heading font-black text-xs uppercase"
+                        className="px-5 py-2 bg-[#141413] hover:bg-[#FF5A00] text-white text-sm font-medium rounded-lg cursor-pointer transition-colors"
                       >
-                        RETOURNER À L'ACCUEIL
+                        Retour à l’accueil
                       </button>
                     </div>
                   </div>
                 ) : (
                   <form onSubmit={handleBookingSubmit} className="space-y-6">
                     {bookingError && (
-                      <div className="p-3 bg-red-950/40 border border-red-800 text-red-200 text-xs flex items-center gap-2">
-                        <AlertCircle className="w-4 h-4 text-red-400 shrink-0" />
+                      <div className="p-3 bg-red-50 border border-red-200 rounded-lg text-red-700 text-xs flex items-center gap-2">
+                        <AlertCircle className="w-4 h-4 shrink-0" />
                         <span>{bookingError}</span>
                       </div>
                     )}
 
-                    {/* Pilote */}
                     <div>
-                      <h4 className="font-heading font-bold text-xs text-[#F5F5F2] uppercase tracking-wider mb-2 flex items-center gap-2">
-                        <span className="text-[#FF6600]">01.</span> COORDONNÉES
+                      <h4 className="text-xs font-semibold text-[#141413] mb-3">
+                        01. Coordonnées
                       </h4>
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                         <input
@@ -286,7 +226,7 @@ export function ContactView({ onOpenBooking, onNavigateHome, onNavigate }: Conta
                           placeholder="Nom *"
                           value={bookingData.nom}
                           onChange={(e) => setBookingData({ ...bookingData, nom: e.target.value })}
-                          className="bg-[#080808] border border-[#222222] focus:border-[#FF6600] text-[#F5F5F2] p-2.5 text-xs font-mono focus:outline-none"
+                          className="bg-[#FAFAF8] border border-[#E6E4DE] focus:border-[#FF5A00] rounded-lg text-[#141413] px-3.5 py-2.5 text-sm focus:outline-none"
                         />
                         <input
                           type="text"
@@ -294,7 +234,7 @@ export function ContactView({ onOpenBooking, onNavigateHome, onNavigate }: Conta
                           placeholder="Prénom *"
                           value={bookingData.prenom}
                           onChange={(e) => setBookingData({ ...bookingData, prenom: e.target.value })}
-                          className="bg-[#080808] border border-[#222222] focus:border-[#FF6600] text-[#F5F5F2] p-2.5 text-xs font-mono focus:outline-none"
+                          className="bg-[#FAFAF8] border border-[#E6E4DE] focus:border-[#FF5A00] rounded-lg text-[#141413] px-3.5 py-2.5 text-sm focus:outline-none"
                         />
                         <input
                           type="tel"
@@ -302,7 +242,7 @@ export function ContactView({ onOpenBooking, onNavigateHome, onNavigate }: Conta
                           placeholder="Téléphone *"
                           value={bookingData.telephone}
                           onChange={(e) => setBookingData({ ...bookingData, telephone: e.target.value })}
-                          className="bg-[#080808] border border-[#222222] focus:border-[#FF6600] text-[#F5F5F2] p-2.5 text-xs font-mono focus:outline-none"
+                          className="bg-[#FAFAF8] border border-[#E6E4DE] focus:border-[#FF5A00] rounded-lg text-[#141413] px-3.5 py-2.5 text-sm focus:outline-none"
                         />
                         <input
                           type="email"
@@ -310,60 +250,58 @@ export function ContactView({ onOpenBooking, onNavigateHome, onNavigate }: Conta
                           placeholder="Email *"
                           value={bookingData.email}
                           onChange={(e) => setBookingData({ ...bookingData, email: e.target.value })}
-                          className="bg-[#080808] border border-[#222222] focus:border-[#FF6600] text-[#F5F5F2] p-2.5 text-xs font-mono focus:outline-none"
+                          className="bg-[#FAFAF8] border border-[#E6E4DE] focus:border-[#FF5A00] rounded-lg text-[#141413] px-3.5 py-2.5 text-sm focus:outline-none"
                         />
                       </div>
                     </div>
 
-                    {/* Machine */}
-                    <div className="pt-2 border-t border-[#1A1A1A]">
-                      <h4 className="font-heading font-bold text-xs text-[#F5F5F2] uppercase tracking-wider mb-2 flex items-center gap-2">
-                        <span className="text-[#FF6600]">02.</span> MACHINE
+                    <div className="pt-4 border-t border-[#E6E4DE]">
+                      <h4 className="text-xs font-semibold text-[#141413] mb-3">
+                        02. Machine
                       </h4>
                       <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                         <input
                           type="text"
                           required
-                          placeholder="Marque moto *"
+                          placeholder="Marque *"
                           value={bookingData.motoMarque}
                           onChange={(e) => setBookingData({ ...bookingData, motoMarque: e.target.value })}
-                          className="bg-[#080808] border border-[#222222] focus:border-[#FF6600] text-[#F5F5F2] p-2.5 text-xs font-mono focus:outline-none"
+                          className="bg-[#FAFAF8] border border-[#E6E4DE] focus:border-[#FF5A00] rounded-lg text-[#141413] px-3.5 py-2.5 text-sm focus:outline-none"
                         />
                         <input
                           type="text"
                           placeholder="Modèle (ex: 300 EXC)"
                           value={bookingData.motoModele}
                           onChange={(e) => setBookingData({ ...bookingData, motoModele: e.target.value })}
-                          className="bg-[#080808] border border-[#222222] focus:border-[#FF6600] text-[#F5F5F2] p-2.5 text-xs font-mono focus:outline-none"
+                          className="bg-[#FAFAF8] border border-[#E6E4DE] focus:border-[#FF5A00] rounded-lg text-[#141413] px-3.5 py-2.5 text-sm focus:outline-none"
                         />
                         <input
                           type="number"
                           placeholder="Année"
                           value={bookingData.motoAnnee}
                           onChange={(e) => setBookingData({ ...bookingData, motoAnnee: e.target.value })}
-                          className="bg-[#080808] border border-[#222222] focus:border-[#FF6600] text-[#F5F5F2] p-2.5 text-xs font-mono focus:outline-none"
+                          className="bg-[#FAFAF8] border border-[#E6E4DE] focus:border-[#FF5A00] rounded-lg text-[#141413] px-3.5 py-2.5 text-sm focus:outline-none"
                         />
                         <input
                           type="text"
                           placeholder="Kilométrage"
                           value={bookingData.kilometrage}
                           onChange={(e) => setBookingData({ ...bookingData, kilometrage: e.target.value })}
-                          className="bg-[#080808] border border-[#222222] focus:border-[#FF6600] text-[#F5F5F2] p-2.5 text-xs font-mono focus:outline-none"
+                          className="bg-[#FAFAF8] border border-[#E6E4DE] focus:border-[#FF5A00] rounded-lg text-[#141413] px-3.5 py-2.5 text-sm focus:outline-none"
                         />
                         <input
                           type="text"
-                          placeholder="Heures moteur (si off-road)"
+                          placeholder="Heures moteur (optionnel)"
                           value={bookingData.heuresMoteur}
                           onChange={(e) => setBookingData({ ...bookingData, heuresMoteur: e.target.value })}
-                          className="sm:col-span-2 bg-[#080808] border border-[#222222] focus:border-[#FF6600] text-[#F5F5F2] p-2.5 text-xs font-mono focus:outline-none"
+                          className="sm:col-span-2 bg-[#FAFAF8] border border-[#E6E4DE] focus:border-[#FF5A00] rounded-lg text-[#141413] px-3.5 py-2.5 text-sm focus:outline-none"
                         />
                       </div>
                     </div>
 
-                    {/* Intervention */}
-                    <div className="pt-2 border-t border-[#1A1A1A]">
-                      <h4 className="font-heading font-bold text-xs text-[#F5F5F2] uppercase tracking-wider mb-2 flex items-center gap-2">
-                        <span className="text-[#FF6600]">03.</span> TYPE D'INTERVENTION
+                    <div className="pt-4 border-t border-[#E6E4DE]">
+                      <h4 className="text-xs font-semibold text-[#141413] mb-3">
+                        03. Intervention souhaitée
                       </h4>
                       <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
                         {(['Entretien', 'Réparation', 'Pneus', 'Diagnostic', 'Préparation', 'Autre'] as const).map((t) => (
@@ -371,10 +309,10 @@ export function ContactView({ onOpenBooking, onNavigateHome, onNavigate }: Conta
                             type="button"
                             key={t}
                             onClick={() => setBookingData({ ...bookingData, typeIntervention: t })}
-                            className={`p-2 text-xs font-heading font-bold uppercase tracking-wider border cursor-pointer transition-colors ${
+                            className={`px-3 py-2 text-xs font-medium rounded-lg border cursor-pointer transition-colors ${
                               bookingData.typeIntervention === t
-                                ? 'bg-[#FF6600] text-[#080808] border-[#FF6600]'
-                                : 'bg-[#080808] text-[#F5F5F2] border-[#222222] hover:border-[#333333]'
+                                ? 'bg-[#141413] text-white border-[#141413]'
+                                : 'bg-[#FAFAF8] text-[#6E6D6A] border-[#E6E4DE] hover:text-[#141413]'
                             }`}
                           >
                             {t}
@@ -383,34 +321,31 @@ export function ContactView({ onOpenBooking, onNavigateHome, onNavigate }: Conta
                       </div>
                     </div>
 
-                    {/* Description & Date */}
-                    <div className="pt-2 border-t border-[#1A1A1A] space-y-3">
+                    <div className="pt-4 border-t border-[#E6E4DE] space-y-4">
                       <textarea
                         rows={3}
-                        placeholder="Description du problème ou intervention souhaitée..."
+                        placeholder="Précisez votre besoin ou les travaux souhaités..."
                         value={bookingData.description}
                         onChange={(e) => setBookingData({ ...bookingData, description: e.target.value })}
-                        className="w-full bg-[#080808] border border-[#222222] focus:border-[#FF6600] text-[#F5F5F2] p-2.5 text-xs font-mono focus:outline-none"
+                        className="w-full bg-[#FAFAF8] border border-[#E6E4DE] focus:border-[#FF5A00] rounded-lg text-[#141413] p-3 text-sm focus:outline-none"
                       />
 
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 items-end">
                         <div>
-                          <label className="block text-[11px] font-mono text-[#737373] mb-1">DATE SOUHAITÉE :</label>
+                          <label className="block text-xs text-[#6E6D6A] mb-1.5">Date souhaitée</label>
                           <input
                             type="date"
                             value={bookingData.dateSouhaitee}
                             onChange={(e) => setBookingData({ ...bookingData, dateSouhaitee: e.target.value })}
-                            className="w-full bg-[#080808] border border-[#222222] focus:border-[#FF6600] text-[#F5F5F2] p-2 text-xs font-mono focus:outline-none"
+                            className="w-full bg-[#FAFAF8] border border-[#E6E4DE] focus:border-[#FF5A00] rounded-lg text-[#141413] px-3.5 py-2.5 text-sm focus:outline-none"
                           />
                         </div>
-                        <div className="flex items-end">
-                          <button
-                            type="submit"
-                            className="w-full py-3 bg-[#FF6600] text-[#080808] font-heading font-black text-xs uppercase tracking-wider hover:bg-[#E65C00] transition-colors cursor-pointer"
-                          >
-                            ENVOYER MA DEMANDE DE RENDEZ-VOUS
-                          </button>
-                        </div>
+                        <button
+                          type="submit"
+                          className="w-full py-3 bg-[#FF5A00] hover:bg-[#E04E00] text-white text-sm font-medium rounded-lg transition-colors cursor-pointer"
+                        >
+                          Envoyer la demande
+                        </button>
                       </div>
                     </div>
                   </form>
@@ -418,21 +353,20 @@ export function ContactView({ onOpenBooking, onNavigateHome, onNavigate }: Conta
               </div>
             )}
 
-            {/* TAB 2: SIMPLE MESSAGE */}
             {activeTab === 'message' && (
               <div>
                 {sentMessage ? (
-                  <div className="py-8 text-center space-y-3 bg-[#080808] border border-[#1A1A1A] p-6">
-                    <CheckCircle2 className="w-10 h-10 text-[#FF6600] mx-auto" />
-                    <h3 className="font-heading font-black text-2xl text-[#F5F5F2] uppercase">
-                      MESSAGE ENVOYÉ AVEC SUCCÈS
+                  <div className="py-10 text-center space-y-3">
+                    <CheckCircle2 className="w-10 h-10 text-[#FF5A00] mx-auto" />
+                    <h3 className="font-heading font-bold text-2xl text-[#141413]">
+                      Message envoyé
                     </h3>
-                    <p className="text-xs text-[#A3A3A3]">
-                      L'atelier vous répondra dans les plus brefs délais.
+                    <p className="text-sm text-[#6E6D6A]">
+                      L’atelier vous répondra dans les plus brefs délais.
                     </p>
                     <button
                       onClick={() => setSentMessage(false)}
-                      className="px-4 py-2 bg-[#1A1A1A] hover:bg-[#FF6600] hover:text-[#080808] text-[#F5F5F2] text-xs font-mono"
+                      className="mt-2 px-4 py-2 bg-[#F2F1ED] hover:bg-[#E6E4DE] text-[#141413] text-sm font-medium rounded-lg cursor-pointer"
                     >
                       Écrire un autre message
                     </button>
@@ -446,14 +380,14 @@ export function ContactView({ onOpenBooking, onNavigateHome, onNavigate }: Conta
                         placeholder="Votre nom *"
                         value={messageForm.name}
                         onChange={(e) => setMessageForm({ ...messageForm, name: e.target.value })}
-                        className="bg-[#080808] border border-[#222222] focus:border-[#FF6600] text-[#F5F5F2] p-2.5 text-xs font-mono focus:outline-none"
+                        className="bg-[#FAFAF8] border border-[#E6E4DE] focus:border-[#FF5A00] rounded-lg text-[#141413] px-3.5 py-2.5 text-sm focus:outline-none"
                       />
                       <input
                         type="tel"
                         placeholder="Téléphone"
                         value={messageForm.phone}
                         onChange={(e) => setMessageForm({ ...messageForm, phone: e.target.value })}
-                        className="bg-[#080808] border border-[#222222] focus:border-[#FF6600] text-[#F5F5F2] p-2.5 text-xs font-mono focus:outline-none"
+                        className="bg-[#FAFAF8] border border-[#E6E4DE] focus:border-[#FF5A00] rounded-lg text-[#141413] px-3.5 py-2.5 text-sm focus:outline-none"
                       />
                     </div>
 
@@ -463,7 +397,7 @@ export function ContactView({ onOpenBooking, onNavigateHome, onNavigate }: Conta
                       placeholder="Email *"
                       value={messageForm.email}
                       onChange={(e) => setMessageForm({ ...messageForm, email: e.target.value })}
-                      className="w-full bg-[#080808] border border-[#222222] focus:border-[#FF6600] text-[#F5F5F2] p-2.5 text-xs font-mono focus:outline-none"
+                      className="w-full bg-[#FAFAF8] border border-[#E6E4DE] focus:border-[#FF5A00] rounded-lg text-[#141413] px-3.5 py-2.5 text-sm focus:outline-none"
                     />
 
                     <textarea
@@ -472,14 +406,14 @@ export function ContactView({ onOpenBooking, onNavigateHome, onNavigate }: Conta
                       placeholder="Votre question..."
                       value={messageForm.message}
                       onChange={(e) => setMessageForm({ ...messageForm, message: e.target.value })}
-                      className="w-full bg-[#080808] border border-[#222222] focus:border-[#FF6600] text-[#F5F5F2] p-2.5 text-xs font-mono focus:outline-none"
+                      className="w-full bg-[#FAFAF8] border border-[#E6E4DE] focus:border-[#FF5A00] rounded-lg text-[#141413] p-3.5 text-sm focus:outline-none"
                     />
 
                     <button
                       type="submit"
-                      className="w-full py-3 bg-[#FF6600] text-[#080808] font-heading font-black text-xs uppercase tracking-wider hover:bg-[#E65C00] transition-colors cursor-pointer"
+                      className="w-full py-3 bg-[#FF5A00] hover:bg-[#E04E00] text-white text-sm font-medium rounded-lg transition-colors cursor-pointer"
                     >
-                      TRANSMETTRE MON MESSAGE
+                      Envoyer le message
                     </button>
                   </form>
                 )}

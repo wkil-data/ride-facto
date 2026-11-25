@@ -6,10 +6,7 @@
 import { useState, useEffect } from 'react';
 import { Header } from './components/Header';
 import { Hero } from './components/Hero';
-import { BrandBanner } from './components/BrandBanner';
 import { ServicesSection } from './components/ServicesSection';
-import { SpecialistOffroadSection } from './components/SpecialistOffroadSection';
-import { TiresFocusSection } from './components/TiresFocusSection';
 import { BrandsSection } from './components/BrandsSection';
 import { AboutSection } from './components/AboutSection';
 import { LocationSection } from './components/LocationSection';
@@ -22,45 +19,72 @@ import { BlogView } from './components/BlogView';
 import { WhatsAppButton } from './components/WhatsAppButton';
 
 export default function App() {
-  const [currentView, setCurrentView] = useState<'home' | 'services' | 'pneus' | 'motos' | 'contact' | 'blog'>('home');
+  const [currentView, setCurrentView] = useState<'home' | 'services' | 'motos' | 'contact' | 'blog'>('home');
   const [bookingModalOpen, setBookingModalOpen] = useState(false);
   const [preselectedBookingService, setPreselectedBookingService] = useState<string | undefined>(undefined);
+  const [isAdmin, setIsAdmin] = useState<boolean>(() => {
+    try {
+      return sessionStorage.getItem('ride_factory_admin_auth') === 'true';
+    } catch {
+      return false;
+    }
+  });
 
-  // SEO View Title & Description synchronization
+  const handleAdminLoginSuccess = () => {
+    setIsAdmin(true);
+    try {
+      sessionStorage.setItem('ride_factory_admin_auth', 'true');
+    } catch (err) {
+      console.warn(err);
+    }
+  };
+
+  const handleAdminLogout = () => {
+    setIsAdmin(false);
+    try {
+      sessionStorage.removeItem('ride_factory_admin_auth');
+    } catch (err) {
+      console.warn(err);
+    }
+  };
+
   useEffect(() => {
     const seoMap: Record<string, { title: string; desc: string }> = {
       home: {
-        title: 'RIDE FACTORY — Atelier & Garage Moto Mons | Petite Rue des Prés 1',
-        desc: 'Atelier moto d’exception à Mons (Belgique) : Entretien, réparation, pneumatiques & bib mousse, préparation off-road et rally raid. Petite Rue des Prés 1, 7000 Mons.',
+        title: 'Ride Factory Mons — Garage & Atelier Moto Multimarques',
+        desc: 'Atelier et garage moto à Mons : entretien, réparation, pneus, préparation tout-terrain et vente de motos toutes marques. Prenez rendez-vous au 0470/55.66.96.',
       },
       services: {
-        title: 'Services & Entretien Moto à Mons | RIDE FACTORY',
-        desc: 'Prestations d’entretien, révision moteur, suspensions et diagnostic moto tout-terrain à Mons chez RIDE FACTORY.',
-      },
-      pneus: {
-        title: 'Montage Pneus & Bib Mousse Moto Mons | RIDE FACTORY',
-        desc: 'Spécialiste montage pneumatiques, bib mousse, tubliss et équilibrage moto enduro, cross, trail et adventure à Mons.',
+        title: 'Entretien, Pneus & Réparation Moto à Mons | Ride Factory',
+        desc: 'Découvrez nos prestations atelier à Mons : révision toutes marques, montage pneus & bib mousse, réparation moteur et préparation off-road.',
       },
       motos: {
-        title: 'Motos Disponibles & Préparations Atelier | RIDE FACTORY Mons',
-        desc: 'Découvrez les motos d’occasion révisées et projets préparés par l’atelier RIDE FACTORY à Mons.',
+        title: 'Motos d’Occasion Révisées à Mons | Ride Factory',
+        desc: 'Consultez nos motos enduro, trail, motocross et adventure révisées sur 32 points et disponibles à Mons chez Ride Factory.',
       },
       contact: {
-        title: 'Contact & Rendez-Vous Atelier Moto Mons | RIDE FACTORY (0470/55.66.96)',
-        desc: 'Contactez l’atelier RIDE FACTORY à Mons : Petite Rue des Prés 1, 7000 Mons. Téléphone & WhatsApp 0470/55.66.96.',
+        title: 'Contact & Rendez-Vous Garage Moto Mons | Ride Factory',
+        desc: 'Prenez rendez-vous à l’atelier Ride Factory à Mons (Petite Rue des Prés 1). Contact par téléphone 0470/55.66.96 ou par email à info@ride-factory.be.',
       },
       blog: {
-        title: 'Guides & Conseils Mécanique Moto Tout-Terrain | Blog RIDE FACTORY Mons',
-        desc: 'Articles techniques et conseils de mécaniciens : montage bib mousse, entretien suspensions, préparation rallye raid à Mons.',
+        title: 'Conseils Mécanique Moto & Tout-Terrain | Blog Ride Factory',
+        desc: 'Guides pratiques et astuces d’atelier par Ride Factory Mons : entretien enduro, montage bib mousse, suspensions et préparation rallye.',
       },
     };
 
     const currentSeo = seoMap[currentView] || seoMap.home;
     document.title = currentSeo.title;
-    const metaDesc = document.querySelector('meta[name="description"]');
-    if (metaDesc) {
-      metaDesc.setAttribute('content', currentSeo.desc);
-    }
+
+    const setMeta = (selector: string, content: string) => {
+      const el = document.querySelector(selector);
+      if (el) el.setAttribute('content', content);
+    };
+
+    setMeta('meta[name="description"]', currentSeo.desc);
+    setMeta('meta[property="og:title"]', currentSeo.title);
+    setMeta('meta[property="og:description"]', currentSeo.desc);
+    setMeta('meta[name="twitter:title"]', currentSeo.title);
+    setMeta('meta[name="twitter:description"]', currentSeo.desc);
   }, [currentView]);
 
   const handleNavigate = (view: string, sectionId?: string) => {
@@ -96,15 +120,13 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#080808] text-[#F5F5F2] flex flex-col font-sans selection:bg-[#FF6600] selection:text-[#080808]">
-      {/* Universal Motorsport Header */}
+    <div className="min-h-screen bg-[#FAFAF8] text-[#141413] flex flex-col font-sans selection:bg-[#FF5A00] selection:text-white">
       <Header
         currentView={currentView}
         onNavigate={handleNavigate}
         onOpenBooking={() => handleOpenBooking()}
       />
 
-      {/* Main Content Router */}
       <main className="flex-1">
         {currentView === 'home' && (
           <>
@@ -113,23 +135,16 @@ export default function App() {
               onScrollToAtelier={handleScrollToAtelier}
             />
 
-            <BrandBanner />
-
             <ServicesSection
               onSelectServiceForBooking={(srv) => handleOpenBooking(srv)}
             />
 
-            <SpecialistOffroadSection
-              onOpenBooking={() => handleOpenBooking('Préparation')}
-            />
-
-            <TiresFocusSection
-              onOpenBookingForTires={() => handleOpenBooking('Pneumatiques / Bib Mousse')}
+            <AboutSection
+              onOpenBooking={() => handleOpenBooking()}
+              onNavigateMotos={() => handleNavigate('motos')}
             />
 
             <BrandsSection />
-
-            <AboutSection />
 
             <LocationSection
               onOpenBooking={() => handleOpenBooking()}
@@ -141,42 +156,21 @@ export default function App() {
           <ServicesDetailView
             onSelectServiceForBooking={(srv) => handleOpenBooking(srv)}
             onNavigateHome={() => handleNavigate('home')}
-            onNavigate={handleNavigate}
           />
-        )}
-
-        {currentView === 'pneus' && (
-          <div className="pt-24 bg-[#080808]">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
-              <button
-                onClick={() => handleNavigate('home')}
-                className="inline-flex items-center gap-2 px-4 py-2 bg-[#111111] hover:bg-[#1A1A1A] text-[#F5F5F2] hover:text-[#FF6600] border border-[#222222] text-xs font-mono font-bold uppercase transition-colors cursor-pointer"
-              >
-                <span>← RETOUR À LA PAGE D'ACCUEIL</span>
-              </button>
-            </div>
-            <TiresFocusSection
-              onOpenBookingForTires={() => handleOpenBooking('Pneumatiques / Bib Mousse')}
-            />
-            <ServicesSection
-              onSelectServiceForBooking={(srv) => handleOpenBooking(srv)}
-            />
-          </div>
         )}
 
         {currentView === 'motos' && (
           <BikesView
+            isAdmin={isAdmin}
+            onAdminLogout={handleAdminLogout}
             onOpenBookingForBike={(bike) => handleOpenBooking(`Visite moto : ${bike}`)}
             onNavigateHome={() => handleNavigate('home')}
-            onNavigate={handleNavigate}
           />
         )}
 
         {currentView === 'contact' && (
           <ContactView
-            onOpenBooking={() => handleOpenBooking()}
             onNavigateHome={() => handleNavigate('home')}
-            onNavigate={handleNavigate}
           />
         )}
 
@@ -184,21 +178,19 @@ export default function App() {
           <BlogView
             onOpenBooking={(srv) => handleOpenBooking(srv)}
             onNavigateHome={() => handleNavigate('home')}
-            onNavigate={handleNavigate}
           />
         )}
       </main>
 
-      {/* Global Motorsport Footer */}
       <Footer
+        isAdmin={isAdmin}
+        onAdminLoginSuccess={handleAdminLoginSuccess}
         onNavigate={handleNavigate}
         onOpenBooking={() => handleOpenBooking()}
       />
 
-      {/* Floating Round WhatsApp Chat Widget */}
       <WhatsAppButton phoneNumber="32470556696" displayPhone="0470/55.66.96" />
 
-      {/* Interactive Booking Modal / Odoo Connector */}
       <BookingModal
         isOpen={bookingModalOpen}
         onClose={() => setBookingModalOpen(false)}

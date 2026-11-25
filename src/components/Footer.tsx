@@ -1,48 +1,41 @@
 import { useState } from 'react';
 import { Logo } from './Logo';
-import {
-  ArrowUp,
-  Instagram,
-  Facebook,
-  ShieldCheck,
-  FileText,
-  Phone,
-  Mail,
-  MapPin,
-  Lock,
-  Unlock,
-  Eye,
-  EyeOff,
-  AlertCircle,
-} from 'lucide-react';
+import { Lock, Unlock, Eye, EyeOff, AlertCircle, X } from 'lucide-react';
 
 interface FooterProps {
+  isAdmin: boolean;
+  onAdminLoginSuccess: () => void;
   onNavigate: (view: string, sectionId?: string) => void;
   onOpenBooking: () => void;
 }
 
 const ADMIN_PASSWORD = 'Ride_F10';
-const ADMIN_AUTH_KEY = 'ride_factory_admin_auth';
 
-export function Footer({ onNavigate, onOpenBooking }: FooterProps) {
+export function Footer({ isAdmin, onAdminLoginSuccess, onNavigate, onOpenBooking }: FooterProps) {
   const [legalModal, setLegalModal] = useState<string | null>(null);
   const [showAdminModal, setShowAdminModal] = useState(false);
   const [adminPassword, setAdminPassword] = useState('');
   const [showPasswordText, setShowPasswordText] = useState(false);
   const [adminError, setAdminError] = useState('');
 
+  const handlePadlockClick = () => {
+    if (isAdmin) {
+      onNavigate('motos');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
+    setShowAdminModal(true);
+    setAdminError('');
+    setAdminPassword('');
+  };
+
   const handleAdminSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (adminPassword === ADMIN_PASSWORD) {
-      try {
-        sessionStorage.setItem(ADMIN_AUTH_KEY, 'true');
-      } catch (err) {
-        console.warn(err);
-      }
+      onAdminLoginSuccess();
       setShowAdminModal(false);
       setAdminPassword('');
       setAdminError('');
-      // Navigate to 'motos' page where admin management is active
       onNavigate('motos');
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } else {
@@ -50,256 +43,193 @@ export function Footer({ onNavigate, onOpenBooking }: FooterProps) {
     }
   };
 
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
   return (
-    <footer className="bg-[#080808] border-t border-[#1A1A1A] pt-16 pb-12 text-[#A3A3A3] select-none">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-16 border-b border-[#1A1A1A]">
-          {/* Col 1: Brand & Identity */}
-          <div className="lg:col-span-2 space-y-4">
-            <div className="flex items-center gap-3">
-              <Logo size="md" />
-            </div>
-            <p className="text-xs text-[#A3A3A3] max-w-sm leading-relaxed">
-              Atelier moto indépendant spécialisé en entretien, préparation, pneumatiques et réfection mécanique. Spécialiste Enduro, Trail, Motocross et Adventure à Mons.
+    <footer className="bg-[#F2F1ED] border-t border-[#E6E4DE] pt-16 pb-12 text-[#6E6D6A] select-none">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 pb-14 border-b border-[#E6E4DE]">
+          {/* Col 1: Brand & Address */}
+          <div className="md:col-span-5 space-y-4">
+            <Logo size="md" showSubtitle />
+            <p className="text-sm text-[#6E6D6A] max-w-sm leading-relaxed">
+              Atelier moto indépendant dédié à l’entretien, la réparation, les pneumatiques et la préparation tout-terrain à Mons.
             </p>
-
-            <div className="pt-2 text-xs font-mono text-[#737373] space-y-1">
-              <div><strong className="text-[#F5F5F2]">RIDE FACTORY</strong></div>
-              <div>Atelier & Garage Moto Tout-Terrain · Mons, Belgique</div>
+            <div className="text-xs text-[#6E6D6A] space-y-1.5 pt-1">
               <div>Petite Rue des Prés 1, 7000 Mons</div>
+              <div className="tabular-nums">Lun – Sam · 09:00 – 18:00 · 0470/55.66.96</div>
+              <div>
+                <a
+                  href="mailto:info@ride-factory.be"
+                  className="text-[#141413] hover:text-[#FF5A00] transition-colors font-medium"
+                >
+                  info@ride-factory.be
+                </a>
+              </div>
             </div>
           </div>
 
-          {/* Col 2: Navigation Atelier */}
-          <div>
-            <h4 className="font-heading font-bold text-sm text-[#F5F5F2] uppercase tracking-wider mb-4">
-              NAVIGATION
+          {/* Col 2: Navigation */}
+          <div className="md:col-span-3">
+            <h4 className="font-heading font-semibold text-sm text-[#141413] mb-4">
+              Navigation
             </h4>
-            <ul className="space-y-2 text-xs font-mono">
+            <ul className="space-y-2.5 text-sm">
               <li>
                 <button
                   onClick={() => onNavigate('home', 'atelier')}
-                  className="hover:text-[#FF6600] transition-colors"
+                  className="hover:text-[#141413] transition-colors cursor-pointer"
                 >
-                  L'Atelier
+                  L’atelier
                 </button>
               </li>
               <li>
                 <button
                   onClick={() => onNavigate('services')}
-                  className="hover:text-[#FF6600] transition-colors"
+                  className="hover:text-[#141413] transition-colors cursor-pointer"
                 >
-                  Tous nos Services
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => onNavigate('pneus')}
-                  className="hover:text-[#FF6600] transition-colors"
-                >
-                  Pneus & Bib Mousse
+                  Services & Tarifs
                 </button>
               </li>
               <li>
                 <button
                   onClick={() => onNavigate('motos')}
-                  className="hover:text-[#FF6600] transition-colors"
+                  className="hover:text-[#141413] transition-colors cursor-pointer"
                 >
-                  Motos à Vendre
+                  Motos à vendre
                 </button>
               </li>
               <li>
                 <button
                   onClick={() => onNavigate('blog')}
-                  className="text-[#FF6600] font-bold hover:underline transition-colors flex items-center gap-1.5"
+                  className="hover:text-[#141413] transition-colors cursor-pointer"
                 >
-                  <span>Blog & Guides Techniques</span>
-                  <span className="text-[10px] bg-[#1A1A1A] text-[#F5F5F2] px-1.5 py-0.2 border border-[#333333]">10 guides</span>
+                  Guides techniques
                 </button>
               </li>
               <li>
                 <button
-                  onClick={() => onNavigate('home', 'about')}
-                  className="hover:text-[#FF6600] transition-colors"
+                  onClick={() => onNavigate('contact')}
+                  className="hover:text-[#141413] transition-colors cursor-pointer"
                 >
-                  À Propos / Built to Ride
+                  Contact
                 </button>
               </li>
             </ul>
           </div>
 
-          {/* Col 3: Services Clés */}
-          <div>
-            <h4 className="font-heading font-bold text-sm text-[#F5F5F2] uppercase tracking-wider mb-4">
-              INTERVENTIONS
-            </h4>
-            <ul className="space-y-2 text-xs font-mono">
-              <li>Vidange & Révision périodique</li>
-              <li>Montage Bib Mousse & Pneus</li>
-              <li>Diagnostic & Électricité moto</li>
-              <li>Préparation Suspensions</li>
-              <li>Échappement & Cartographie</li>
-              <li>Partie cycle & Biellettes</li>
-            </ul>
-          </div>
-
-          {/* Col 4: Réseaux & Contact */}
-          <div>
-            <h4 className="font-heading font-bold text-sm text-[#F5F5F2] uppercase tracking-wider mb-4">
-              COMMUNAUTÉ
-            </h4>
-            <div className="space-y-3 text-xs font-mono mb-6">
-              <a
-                href="https://instagram.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 hover:text-[#FF6600] transition-colors"
+          {/* Col 3: Action & Socials */}
+          <div className="md:col-span-4 flex flex-col justify-between space-y-6">
+            <div>
+              <h4 className="font-heading font-semibold text-sm text-[#141413] mb-4">
+                Réseaux & Rendez-vous
+              </h4>
+              <div className="flex flex-col space-y-2 text-sm mb-5">
+                <a
+                  href="https://instagram.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-[#141413] transition-colors"
+                >
+                  Instagram @ridefactory
+                </a>
+                <a
+                  href="https://facebook.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-[#141413] transition-colors"
+                >
+                  Facebook /ridefactorymons
+                </a>
+              </div>
+              <button
+                onClick={onOpenBooking}
+                className="px-5 py-2.5 bg-[#141413] hover:bg-[#FF5A00] text-white text-sm font-medium rounded-lg transition-colors cursor-pointer"
               >
-                <Instagram className="w-4 h-4 text-[#FF6600]" />
-                <span>Instagram @ridefactory</span>
-              </a>
-              <a
-                href="https://facebook.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 hover:text-[#FF6600] transition-colors"
-              >
-                <Facebook className="w-4 h-4 text-[#FF6600]" />
-                <span>Facebook /ridefactorymons</span>
-              </a>
+                Prendre rendez-vous
+              </button>
             </div>
-
-            <button
-              onClick={onOpenBooking}
-              className="w-full py-2.5 bg-[#FF6600] text-[#080808] font-heading font-bold text-xs uppercase tracking-wider hover:bg-[#E65C00] transition-colors"
-            >
-              PRENDRE RENDEZ-VOUS
-            </button>
           </div>
         </div>
 
-        {/* Blog Highlight Box in Footer */}
-        <div className="my-10 bg-[#111111] border border-[#1A1A1A] hover:border-[#333333] p-6 sm:p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 transition-colors">
-          <div className="space-y-1.5 max-w-2xl">
-            <div className="flex items-center gap-2 text-xs font-mono text-[#FF6600] uppercase tracking-widest">
-              <span className="w-2 h-0.5 bg-[#FF6600]" />
-              <span>BLOG & GUIDES TECHNIQUES DE L'ATELIER · MONS</span>
-            </div>
-            <h3 className="font-heading font-black text-2xl sm:text-3xl text-[#F5F5F2] uppercase tracking-wide">
-              10 DOSSIERS MÉCANIQUES & CONSEILS OFF-ROAD
-            </h3>
-            <p className="text-xs sm:text-sm text-[#A3A3A3] leading-relaxed">
-              Entretien enduro 2T/4T, montage bib mousse sans pincer, préparation trail TET, réfection motocross et métrologie d'atelier à Mons. Des articles complets de plus de 900 mots rédigés par nos mécaniciens.
-            </p>
+        {/* Quiet Bottom Bar */}
+        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#6E6D6A]">
+          <div className="flex items-center gap-3">
+            <span>© {new Date().getFullYear()} Ride Factory Mons</span>
+            <span aria-hidden="true">·</span>
+            <span className="font-medium text-[#141413]">Work. Ride. Repeat.</span>
           </div>
 
-          <button
-            onClick={() => onNavigate('blog')}
-            className="px-6 py-3.5 bg-[#FF6600] hover:bg-[#E65C00] text-[#080808] font-heading font-black text-xs uppercase tracking-wider flex items-center gap-2 transition-colors cursor-pointer shrink-0"
-          >
-            <span>ACCÉDER AU BLOG TECHNIQUE</span>
-            <span className="text-sm">→</span>
-          </button>
-        </div>
-
-        {/* Bottom Bar with Final Punchline */}
-        <div className="pt-8 flex flex-col md:flex-row items-center justify-between gap-6">
-          {/* Final Requested Punchline */}
-          <div className="font-heading font-black text-2xl sm:text-3xl text-[#F5F5F2] tracking-wider uppercase flex items-center gap-3">
-            <span>WORK.</span>
-            <span className="text-[#FF6600]">RIDE.</span>
-            <span>REPEAT.</span>
-          </div>
-
-          {/* Legal links */}
-          <div className="flex flex-wrap items-center gap-4 text-xs font-mono text-[#737373]">
+          <div className="flex flex-wrap items-center gap-4">
             <button
               onClick={() => setLegalModal('mentions')}
-              className="hover:text-[#F5F5F2] transition-colors"
+              className="hover:text-[#141413] transition-colors cursor-pointer"
             >
-              Mentions Légales
+              Mentions légales
             </button>
-            <span>·</span>
             <button
               onClick={() => setLegalModal('cgv')}
-              className="hover:text-[#F5F5F2] transition-colors"
+              className="hover:text-[#141413] transition-colors cursor-pointer"
             >
-              Conditions Générales
+              Conditions générales
             </button>
-            <span>·</span>
             <button
               onClick={() => setLegalModal('privacy')}
-              className="hover:text-[#F5F5F2] transition-colors"
+              className="hover:text-[#141413] transition-colors cursor-pointer"
             >
-              Politique de Confidentialité
+              Confidentialité
+            </button>
+            {/* Discreet padlock icon for admin access */}
+            <button
+              onClick={handlePadlockClick}
+              aria-label="Administration"
+              className="text-[#C8C5BD] opacity-60 hover:opacity-100 hover:text-[#6E6D6A] transition-opacity p-1 rounded cursor-pointer"
+            >
+              <Lock className="w-3 h-3" />
             </button>
           </div>
-
-          {/* Back to top button */}
-          <button
-            onClick={scrollToTop}
-            className="p-2.5 bg-[#111111] hover:bg-[#1A1A1A] border border-[#222222] text-[#F5F5F2] transition-colors cursor-pointer"
-            aria-label="Remonter en haut de page"
-          >
-            <ArrowUp className="w-4 h-4 text-[#FF6600]" />
-          </button>
-        </div>
-
-        <div className="text-[11px] font-mono text-[#555555] mt-6 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <div>
-            © {new Date().getFullYear()} RIDE FACTORY · Tous droits réservés. Garage moto Mons, Belgique (Petite Rue des Prés 1, 7000 Mons).
-          </div>
-          {/* Discret padlock for admin access - no password displayed */}
-          <button
-            onClick={() => {
-              setShowAdminModal(true);
-              setAdminError('');
-            }}
-            aria-label="Accès sécurisé"
-            className="text-[#333333] hover:text-[#777777] transition-colors p-1 rounded cursor-pointer"
-            title="Espace sécurisé"
-          >
-            <Lock className="w-3.5 h-3.5" />
-          </button>
         </div>
       </div>
 
       {/* Legal Modal */}
       {legalModal && (
-        <div className="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-[#111111] border border-[#222222] max-w-xl w-full p-6 sm:p-8 relative max-h-[80vh] overflow-y-auto">
+        <div
+          className="fixed inset-0 z-50 bg-black/40 backdrop-blur-xs flex items-center justify-center p-4"
+          onClick={() => setLegalModal(null)}
+        >
+          <div
+            className="bg-white border border-[#E6E4DE] rounded-2xl max-w-lg w-full p-6 sm:p-8 relative max-h-[80vh] overflow-y-auto shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          >
             <button
               onClick={() => setLegalModal(null)}
-              className="absolute top-5 right-5 text-[#A3A3A3] hover:text-[#F5F5F2]"
+              className="absolute top-5 right-5 p-1.5 text-[#6E6D6A] hover:text-[#141413] rounded-lg hover:bg-[#F2F1ED] cursor-pointer"
+              aria-label="Fermer"
             >
-              ✕
+              <X className="w-4 h-4" />
             </button>
 
-            <h3 className="font-heading font-black text-2xl text-[#F5F5F2] uppercase mb-4">
+            <h3 className="font-heading font-bold text-xl text-[#141413] mb-4">
               {legalModal === 'mentions'
-                ? 'MENTIONS LÉGALES'
+                ? 'Mentions légales'
                 : legalModal === 'cgv'
-                ? 'CONDITIONS GÉNÉRALES'
-                : 'POLITIQUE DE CONFIDENTIALITÉ'}
+                ? 'Conditions générales'
+                : 'Politique de confidentialité'}
             </h3>
 
-            <div className="space-y-4 text-xs font-mono text-[#A3A3A3] leading-relaxed">
+            <div className="space-y-4 text-sm text-[#6E6D6A] leading-relaxed">
               {legalModal === 'mentions' && (
                 <>
                   <p>
-                    <strong className="text-[#F5F5F2]">Éditeur du site :</strong><br />
-                    RIDE FACTORY<br />
-                    Petite Rue des Prés 1, 7000 Mons, Belgique
+                    <strong className="text-[#141413]">Éditeur du site :</strong> Ride Factory, Petite Rue des Prés 1, 7000 Mons, Belgique.
                   </p>
                   <p>
-                    <strong className="text-[#F5F5F2]">Activité :</strong> Atelier de réparation, entretien et préparation de motocycles, vente de pièces détachées, consommables et équipements.
+                    <strong className="text-[#141413]">Contact :</strong>{' '}
+                    <a href="mailto:info@ride-factory.be" className="text-[#FF5A00] hover:underline">
+                      info@ride-factory.be
+                    </a>{' '}
+                    · 0470/55.66.96
                   </p>
                   <p>
-                    <strong className="text-[#F5F5F2]">Responsable de publication :</strong> Direction RIDE FACTORY Mons.
+                    <strong className="text-[#141413]">Activité :</strong> Atelier de réparation, entretien et préparation de motocycles, vente de pièces et véhicules.
                   </p>
                 </>
               )}
@@ -307,13 +237,10 @@ export function Footer({ onNavigate, onOpenBooking }: FooterProps) {
               {legalModal === 'cgv' && (
                 <>
                   <p>
-                    Toute intervention mécanique fait l'objet d'un ordre de réparation préalable ou d'un devis validé par le client.
+                    Toute intervention mécanique fait l’objet d’un ordre de réparation préalable ou d’un devis validé par le client.
                   </p>
                   <p>
-                    Les pièces d'usure remplacées sont tenues à disposition du propriétaire lors de la restitution du véhicule.
-                  </p>
-                  <p>
-                    Les machines doivent être retirées dans un délai de 5 jours ouvrés suivant la notification d'achèvement des travaux.
+                    Les pièces d’usure remplacées sont tenues à disposition du propriétaire lors de la restitution du véhicule.
                   </p>
                 </>
               )}
@@ -321,65 +248,69 @@ export function Footer({ onNavigate, onOpenBooking }: FooterProps) {
               {legalModal === 'privacy' && (
                 <>
                   <p>
-                    Les données personnelles recueillies dans le cadre des demandes de rendez-vous (nom, prénom, téléphone, email, caractéristiques du véhicule) sont uniquement destinées au traitement technique et commercial de votre dossier par RIDE FACTORY.
+                    Les données recueillies dans le cadre des demandes de rendez-vous sont exclusivement destinées au suivi technique de votre dossier par Ride Factory.
                   </p>
                   <p>
-                    Aucune donnée n'est cédée à des tiers. Conformément au RGPD, vous disposez d'un droit d'accès, de rectification et d'effacement en nous contactant directement à l'atelier.
+                    Conformément au RGPD, vous disposez d’un droit d’accès, de rectification et d’effacement en nous contactant à l’adresse{' '}
+                    <a href="mailto:info@ride-factory.be" className="text-[#FF5A00] hover:underline">
+                      info@ride-factory.be
+                    </a>.
                   </p>
                 </>
               )}
-            </div>
-
-            <div className="pt-6 mt-6 border-t border-[#1A1A1A]">
-              <button
-                onClick={() => setLegalModal(null)}
-                className="w-full py-2.5 bg-[#1A1A1A] hover:bg-[#FF6600] hover:text-[#080808] text-[#F5F5F2] font-heading font-bold text-xs uppercase tracking-wider transition-colors"
-              >
-                FERMER
-              </button>
             </div>
           </div>
         </div>
       )}
 
-      {/* Discreet Admin Login Modal (Triggered exclusively by footer lock icon) */}
+      {/* Discreet Admin Login Modal */}
       {showAdminModal && (
-        <div className="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-[#111111] border border-[#222222] max-w-sm w-full p-6 relative">
+        <div
+          className="fixed inset-0 z-50 bg-black/40 backdrop-blur-xs flex items-center justify-center p-4"
+          onClick={() => {
+            setShowAdminModal(false);
+            setAdminError('');
+            setAdminPassword('');
+          }}
+        >
+          <div
+            className="bg-white border border-[#E6E4DE] rounded-2xl max-w-sm w-full p-6 relative shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          >
             <button
               onClick={() => {
                 setShowAdminModal(false);
                 setAdminError('');
                 setAdminPassword('');
               }}
-              className="absolute top-4 right-4 text-[#737373] hover:text-[#F5F5F2]"
+              className="absolute top-4 right-4 p-1.5 text-[#6E6D6A] hover:text-[#141413] rounded-lg hover:bg-[#F2F1ED] cursor-pointer"
               aria-label="Fermer"
             >
-              ✕
+              <X className="w-4 h-4" />
             </button>
 
-            <div className="text-center mb-5">
-              <div className="w-10 h-10 bg-[#1A1A1A] border border-[#333333] rounded-full flex items-center justify-center mx-auto mb-2 text-[#A3A3A3]">
-                <Lock className="w-4 h-4 text-[#FF6600]" />
+            <div className="mb-5">
+              <div className="w-9 h-9 bg-[#F2F1ED] rounded-full flex items-center justify-center mb-3">
+                <Lock className="w-4 h-4 text-[#FF5A00]" />
               </div>
-              <h3 className="font-heading font-black text-lg text-[#F5F5F2] uppercase">
-                ACCÈS GESTION
+              <h3 className="font-heading font-bold text-lg text-[#141413]">
+                Accès gestion
               </h3>
-              <p className="text-[11px] text-[#737373] font-mono mt-0.5">
-                Espace réservé à l'équipe Ride Factory
+              <p className="text-xs text-[#6E6D6A] mt-0.5">
+                Espace réservé à l’équipe Ride Factory
               </p>
             </div>
 
             {adminError && (
-              <div className="mb-4 p-2.5 bg-red-950/70 border border-red-500/80 text-red-200 text-xs font-mono flex items-center gap-2">
-                <AlertCircle className="w-4 h-4 shrink-0 text-red-400" />
+              <div className="mb-4 p-2.5 bg-red-50 border border-red-200 rounded-lg text-red-700 text-xs flex items-center gap-2">
+                <AlertCircle className="w-4 h-4 shrink-0" />
                 <span>{adminError}</span>
               </div>
             )}
 
             <form onSubmit={handleAdminSubmit} className="space-y-4">
               <div>
-                <label className="block text-[11px] font-mono text-[#A3A3A3] uppercase mb-1">
+                <label className="block text-xs font-medium text-[#6E6D6A] mb-1.5">
                   Mot de passe
                 </label>
                 <div className="relative">
@@ -393,19 +324,20 @@ export function Footer({ onNavigate, onOpenBooking }: FooterProps) {
                       setAdminPassword(e.target.value);
                       setAdminError('');
                     }}
-                    className="w-full bg-[#080808] border border-[#333333] focus:border-[#FF6600] px-3.5 py-2.5 text-sm text-[#F5F5F2] font-mono focus:outline-none"
+                    className="w-full bg-[#FAFAF8] border border-[#E6E4DE] focus:border-[#FF5A00] rounded-lg px-3.5 py-2.5 text-sm text-[#141413] font-mono focus:outline-none"
                   />
                   <button
                     type="button"
                     onClick={() => setShowPasswordText(!showPasswordText)}
-                    className="absolute right-2.5 top-2.5 text-[#737373] hover:text-[#F5F5F2]"
+                    className="absolute right-2.5 top-2.5 text-[#6E6D6A] hover:text-[#141413] cursor-pointer"
+                    aria-label="Afficher le mot de passe"
                   >
                     {showPasswordText ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                   </button>
                 </div>
               </div>
 
-              <div className="pt-2 flex gap-2">
+              <div className="pt-1 flex gap-2">
                 <button
                   type="button"
                   onClick={() => {
@@ -413,16 +345,16 @@ export function Footer({ onNavigate, onOpenBooking }: FooterProps) {
                     setAdminError('');
                     setAdminPassword('');
                   }}
-                  className="w-1/3 py-2.5 bg-[#1F1F1F] text-[#A3A3A3] hover:text-[#F5F5F2] text-xs font-mono uppercase"
+                  className="w-1/3 py-2.5 bg-[#F2F1ED] text-[#6E6D6A] hover:text-[#141413] text-xs font-medium rounded-lg cursor-pointer"
                 >
                   Annuler
                 </button>
                 <button
                   type="submit"
-                  className="w-2/3 py-2.5 bg-[#FF6600] hover:bg-[#E65C00] text-[#080808] font-heading font-black text-xs uppercase tracking-wider flex items-center justify-center gap-1.5 cursor-pointer"
+                  className="w-2/3 py-2.5 bg-[#141413] hover:bg-[#FF5A00] text-white text-xs font-medium rounded-lg flex items-center justify-center gap-1.5 cursor-pointer transition-colors"
                 >
                   <Unlock className="w-3.5 h-3.5" />
-                  <span>CONNEXION</span>
+                  <span>Connexion</span>
                 </button>
               </div>
             </form>

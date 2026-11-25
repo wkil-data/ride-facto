@@ -2,43 +2,45 @@ import { MOTORCYCLE_BRANDS } from '../data/brands';
 
 export function BrandsSection() {
   return (
-    <section className="py-20 bg-[#080808] border-b border-[#1A1A1A] select-none">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="max-w-2xl mb-12">
-          <div className="flex items-center gap-2 text-xs font-mono text-[#FF6600] uppercase tracking-widest mb-3">
-            <span className="w-2 h-0.5 bg-[#FF6600]" />
-            <span>EXPERTISE TECHNIQUE MULTIMARQUES</span>
+    <section className="py-20 lg:py-24 bg-[#FAFAF8] border-t border-[#E6E4DE] select-none">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-12">
+          <div>
+            <p className="text-sm font-medium text-[#FF5A00] mb-2">
+              Expertise multimarques
+            </p>
+            <h2 className="font-heading font-extrabold text-2xl sm:text-3xl text-[#141413] tracking-tight">
+              Toutes les marques, sans exception.
+            </h2>
           </div>
-
-          <h2 className="font-heading font-black text-3xl sm:text-5xl text-[#F5F5F2] uppercase tracking-tight">
-            LES MARQUES QUE NOUS CONNAISSONS.
-          </h2>
-
-          <p className="text-xs sm:text-sm text-[#A3A3A3] mt-2">
-            Moteurs 2-temps à injection TPI/TBI, monocylindres 4-temps poussés ou bicylindres d'aventure : nous maîtrisons les spécificités de chaque constructeur.
+          <p className="text-sm text-[#6E6D6A] max-w-md">
+            Spécialistes KTM, Husqvarna, GasGas, Sherco, Beta et constructeurs japonais, nous entretenons et réparons également toutes les autres marques à l’atelier.
           </p>
         </div>
 
-        {/* Clean Typographic Motorsport Grid (strictly typography, no copyrighted icons) */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-9 gap-px bg-[#1A1A1A] border border-[#1A1A1A]">
+        <div className="grid grid-cols-2 sm:grid-cols-5 gap-3 sm:gap-4">
           {MOTORCYCLE_BRANDS.map((brand) => (
             <div
               key={brand.name}
-              className="bg-[#0c0c0c] hover:bg-[#141414] p-5 sm:p-6 flex flex-col justify-between items-center text-center transition-colors group cursor-default"
+              className="py-5 px-3 bg-white border border-[#E6E4DE] rounded-xl flex flex-col items-center justify-center text-center transition-colors hover:border-[#FF5A00]/50"
             >
-              <div className="text-[10px] font-mono text-[#737373] tracking-widest uppercase mb-4">
-                {brand.origin}
-              </div>
-
-              <div className="font-heading font-black text-2xl sm:text-3xl text-[#F5F5F2] group-hover:text-[#FF6600] transition-colors tracking-wider uppercase">
+              <span className="font-heading font-bold text-base text-[#141413] tracking-tight">
                 {brand.name}
-              </div>
-
-              <div className="text-[10px] font-mono text-[#737373] group-hover:text-[#A3A3A3] transition-colors mt-3">
-                {brand.specialty}
-              </div>
+              </span>
+              <span className="text-[11px] text-[#6E6D6A] mt-1">
+                {brand.origin}
+              </span>
             </div>
           ))}
+
+          <div className="py-5 px-3 bg-[#F2F1ED] border border-dashed border-[#C9C6BE] rounded-xl flex flex-col items-center justify-center text-center">
+            <span className="font-heading font-bold text-base text-[#FF5A00] tracking-tight">
+              + Toutes autres
+            </span>
+            <span className="text-[11px] text-[#6E6D6A] mt-1">
+              BMW, Ducati, TM, Fantic…
+            </span>
+          </div>
         </div>
       </div>
     </section>

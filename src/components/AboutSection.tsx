@@ -1,82 +1,86 @@
-import { Wrench, Compass, ShieldAlert, Award } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 
-export function AboutSection() {
+interface AboutSectionProps {
+  onOpenBooking?: () => void;
+  onNavigateMotos?: () => void;
+}
+
+export function AboutSection({ onOpenBooking, onNavigateMotos }: AboutSectionProps) {
+  const pillars = [
+    {
+      title: 'Prise en charge rapide à Mons',
+      desc: 'Déposez votre moto à deux pas des grands axes (E19 / E42) avec accès direct pour remorque et camionnette.',
+    },
+    {
+      title: 'Devis clair avant intervention',
+      desc: 'Aucun frais imprévu : diagnostic précis, validation préalable et présentation des pièces remplacées.',
+    },
+    {
+      title: 'Expérience directe du terrain',
+      desc: 'Des réglages et contrôles éprouvés chaque week-end en enduro, trail, rallye raid et motocross.',
+    },
+  ];
+
   return (
-    <section id="about" className="py-24 lg:py-32 bg-[#0c0c0c] border-b border-[#1A1A1A]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          {/* Main Statement */}
+    <section id="about" className="py-24 lg:py-32 bg-white border-t border-[#E6E4DE]">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+          {/* Editorial Story */}
           <div className="lg:col-span-7">
-            <div className="flex items-center gap-2 text-xs font-mono text-[#FF6600] uppercase tracking-widest mb-4">
-              <span className="w-2 h-0.5 bg-[#FF6600]" />
-              <span>PHILOSOPHIE & ATELIER</span>
-            </div>
-
-            <h2 className="font-heading font-black text-5xl sm:text-7xl lg:text-8xl text-[#F5F5F2] uppercase tracking-tight leading-[0.9] mb-8">
-              BUILT TO RIDE.
+            <p className="text-sm font-medium text-[#FF5A00] mb-3">
+              Pourquoi choisir Ride Factory
+            </p>
+            <h2
+              className="font-heading font-extrabold text-[#141413] tracking-tight leading-[1.1] mb-6"
+              style={{ fontSize: 'clamp(1.875rem, 3.5vw, 2.75rem)', textWrap: 'balance' }}
+            >
+              Built to Ride.
             </h2>
 
-            <div className="space-y-6 text-base sm:text-lg text-[#A3A3A3] leading-relaxed">
-              <p className="text-xl sm:text-2xl text-[#F5F5F2] font-heading font-semibold uppercase leading-snug">
-                Ride Factory est né d'une passion simple :<br />
-                rouler, entretenir et préparer des motos.
+            <div className="space-y-5 text-base sm:text-lg text-[#6E6D6A] leading-relaxed max-w-2xl mb-9">
+              <p className="text-[#141413] font-medium">
+                Un atelier indépendant pensé pour vous remettre en selle rapidement, avec une mécanique fiable et sans compromis.
               </p>
-
               <p>
-                Notre atelier de Mons est particulièrement orienté enduro, trail, motocross et adventure.
-              </p>
-
-              <p>
-                Que ce soit pour une vidange, une remise en état, un train de pneus ou une préparation complète, notre objectif reste le même :
-              </p>
-
-              <p className="font-heading font-black text-2xl sm:text-3xl text-[#FF6600] uppercase tracking-wide">
-                VOUS RENDRE UNE MOTO PRÊTE À ROULER.
+                Installé au cœur de Mons, Ride Factory accueille votre machine du lundi au samedi. Qu’il s’agisse d’un entretien courant, d’une panne ou d’une préparation complète, passez nous voir ou bloquez votre créneau en ligne.
               </p>
             </div>
+
+            {(onOpenBooking || onNavigateMotos) && (
+              <div className="flex flex-wrap items-center gap-5">
+                {onOpenBooking && (
+                  <button
+                    onClick={onOpenBooking}
+                    className="inline-flex items-center gap-2 px-6 py-3 bg-[#141413] hover:bg-[#FF5A00] text-white text-sm font-medium rounded-lg transition-colors duration-150 cursor-pointer whitespace-nowrap shrink-0"
+                  >
+                    <span>Réserver un créneau atelier</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </button>
+                )}
+                {onNavigateMotos && (
+                  <button
+                    onClick={onNavigateMotos}
+                    className="text-sm font-medium text-[#141413] hover:text-[#FF5A00] transition-colors cursor-pointer py-2 whitespace-nowrap shrink-0"
+                  >
+                    Voir les motos à vendre →
+                  </button>
+                )}
+              </div>
+            )}
           </div>
 
-          {/* Pillars / Workshop credentials */}
-          <div className="lg:col-span-5 bg-[#080808] border border-[#1A1A1A] p-8 space-y-6">
-            <div className="border-b border-[#1A1A1A] pb-4">
-              <span className="text-[11px] font-mono text-[#FF6600] uppercase block">ATELIER & GARAGE MOTO</span>
-              <div className="font-heading font-black text-2xl text-[#F5F5F2] uppercase">
-                RIDE FACTORY MONS
+          {/* Unboxed Hairline Pillars */}
+          <div className="lg:col-span-5 divide-y divide-[#E6E4DE] border-y border-[#E6E4DE]">
+            {pillars.map((pillar, idx) => (
+              <div key={idx} className="py-5">
+                <h3 className="font-heading font-bold text-base text-[#141413] mb-1">
+                  {pillar.title}
+                </h3>
+                <p className="text-sm text-[#6E6D6A] leading-relaxed">
+                  {pillar.desc}
+                </p>
               </div>
-              <div className="text-xs font-mono text-[#A3A3A3] mt-1">
-                Petite Rue des Prés 1 · 7000 Mons
-              </div>
-            </div>
-
-            <div className="space-y-4 text-xs font-mono">
-              <div className="flex items-start gap-3">
-                <span className="w-1.5 h-1.5 bg-[#FF6600] mt-1 shrink-0" />
-                <div>
-                  <div className="text-[#F5F5F2] font-bold uppercase">OUTILLAGE SPÉCIALISÉ ENDURO & RALLYE</div>
-                  <div className="text-[#737373] mt-0.5">Démonte-mousse, comparateurs d'alésage, valise diagnostic tout-terrain.</div>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-3">
-                <span className="w-1.5 h-1.5 bg-[#FF6600] mt-1 shrink-0" />
-                <div>
-                  <div className="text-[#F5F5F2] font-bold uppercase">CONSEILS DE PILOTES DE TERRAIN</div>
-                  <div className="text-[#737373] mt-0.5">Nous roulons chaque week-end sur les terrains que nous préparons.</div>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-3">
-                <span className="w-1.5 h-1.5 bg-[#FF6600] mt-1 shrink-0" />
-                <div>
-                  <div className="text-[#F5F5F2] font-bold uppercase">TRANSPARENCE TOTALE DES INTERVENTIONS</div>
-                  <div className="text-[#737373] mt-0.5">Pièces usées conservées et montrées au client lors de la remise des clés.</div>
-                </div>
-              </div>
-            </div>
-
-            <div className="pt-4 border-t border-[#1A1A1A] text-[11px] font-mono text-[#737373]">
-              Atelier situé en plein cœur de Mons, accessible facilement depuis l'E19 et l'E42.
-            </div>
+            ))}
           </div>
         </div>
       </div>
