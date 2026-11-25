@@ -15,6 +15,7 @@ const PRESET_IMAGES = [
   { label: 'Adventure Ténéré 700', url: '/images/bikes/tenere_700.jpg' },
   { label: 'Enduro GASGAS 350F', url: '/images/bikes/gasgas_350f.jpg' },
   { label: 'Beta 300 Racing 2T', url: '/images/bikes/beta_300_rr.jpg' },
+  { label: 'Honda CRF 450 Rally', url: '/images/bikes/honda_crf_450r.jpg' },
 ];
 
 export function BikeAdminModal({

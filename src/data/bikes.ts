@@ -1,9 +1,10 @@
 import { Motorbike } from './types';
-import ktmImg from '../assets/images/ktm_300_exc_enduro_1792762726710.jpg';
-import husqvarnaImg from '../assets/images/husqvarna_701_rally_1792762749903.jpg';
-import tenereImg from '../assets/images/tenere_700_rally_1792762748528.jpg';
-import gasgasImg from '../assets/images/gasgas_ec_enduro_1792762764004.jpg';
-import betaImg from '../assets/images/beta_rr_racing_1792762764429.jpg';
+import ktmImg from '../assets/images/ktm_300_exc_showroom_1795609136061.jpg';
+import husqvarnaImg from '../assets/images/husqvarna_701_rally_showroom_1795609152754.jpg';
+import tenereImg from '../assets/images/tenere_700_rally_showroom_1795609153471.jpg';
+import gasgasImg from '../assets/images/gasgas_350f_showroom_1795609154343.jpg';
+import betaImg from '../assets/images/beta_300_rr_showroom_1795609154278.jpg';
+import hondaImg from '../assets/images/honda_crf450r_showroom_1795609154219.jpg';
 
 export const MOTORBIKES_DATA: Motorbike[] = [
   {
@@ -132,7 +133,7 @@ export const MOTORBIKES_DATA: Motorbike[] = [
     category: 'Motocross',
     condition: 'Occasion Révisée',
     status: 'vendue',
-    imageUrl: ktmImg,
+    imageUrl: hondaImg,
     highlightBadge: 'Vendue par Ride Factory',
     description: 'Piste et cross pur. Moteur puissant et ultra-réactif avec contrôle de traction HSTC et 3 cartographies moteur au guidon. Jamais couru en championnat boueux.',
     keyFeatures: [

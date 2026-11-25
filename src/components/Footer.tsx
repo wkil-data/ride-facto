@@ -69,14 +69,14 @@ export function Footer({ isAdmin, onAdminLoginSuccess, onNavigate, onOpenBooking
 
           {/* Col 2: Navigation */}
           <div className="md:col-span-3">
-            <h4 className="font-heading font-semibold text-sm text-[#141413] mb-4">
+            <h3 className="font-heading font-semibold text-sm text-[#141413] mb-4">
               Navigation
-            </h4>
-            <ul className="space-y-2.5 text-sm">
+            </h3>
+            <ul className="space-y-1 text-sm">
               <li>
                 <button
                   onClick={() => onNavigate('home', 'atelier')}
-                  className="hover:text-[#141413] transition-colors cursor-pointer"
+                  className="py-1.5 hover:text-[#141413] transition-colors cursor-pointer"
                 >
                   L’atelier
                 </button>
@@ -84,7 +84,7 @@ export function Footer({ isAdmin, onAdminLoginSuccess, onNavigate, onOpenBooking
               <li>
                 <button
                   onClick={() => onNavigate('services')}
-                  className="hover:text-[#141413] transition-colors cursor-pointer"
+                  className="py-1.5 hover:text-[#141413] transition-colors cursor-pointer"
                 >
                   Services & Tarifs
                 </button>
@@ -92,7 +92,7 @@ export function Footer({ isAdmin, onAdminLoginSuccess, onNavigate, onOpenBooking
               <li>
                 <button
                   onClick={() => onNavigate('motos')}
-                  className="hover:text-[#141413] transition-colors cursor-pointer"
+                  className="py-1.5 hover:text-[#141413] transition-colors cursor-pointer"
                 >
                   Motos à vendre
                 </button>
@@ -100,7 +100,7 @@ export function Footer({ isAdmin, onAdminLoginSuccess, onNavigate, onOpenBooking
               <li>
                 <button
                   onClick={() => onNavigate('blog')}
-                  className="hover:text-[#141413] transition-colors cursor-pointer"
+                  className="py-1.5 hover:text-[#141413] transition-colors cursor-pointer"
                 >
                   Guides techniques
                 </button>
@@ -108,7 +108,7 @@ export function Footer({ isAdmin, onAdminLoginSuccess, onNavigate, onOpenBooking
               <li>
                 <button
                   onClick={() => onNavigate('contact')}
-                  className="hover:text-[#141413] transition-colors cursor-pointer"
+                  className="py-1.5 hover:text-[#141413] transition-colors cursor-pointer"
                 >
                   Contact
                 </button>
@@ -119,30 +119,64 @@ export function Footer({ isAdmin, onAdminLoginSuccess, onNavigate, onOpenBooking
           {/* Col 3: Action & Socials */}
           <div className="md:col-span-4 flex flex-col justify-between space-y-6">
             <div>
-              <h4 className="font-heading font-semibold text-sm text-[#141413] mb-4">
+              <h3 className="font-heading font-semibold text-sm text-[#141413] mb-4">
                 Réseaux & Rendez-vous
-              </h4>
-              <div className="flex flex-col space-y-2 text-sm mb-5">
-                <a
-                  href="https://instagram.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-[#141413] transition-colors"
-                >
-                  Instagram @ridefactory
-                </a>
-                <a
-                  href="https://facebook.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-[#141413] transition-colors"
-                >
-                  Facebook /ridefactorymons
-                </a>
-              </div>
+              </h3>
+              <ul className="grid grid-cols-2 gap-x-4 gap-y-1 text-sm mb-5">
+                <li>
+                  <a
+                    href="https://www.instagram.com/ridefactory.mons"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-block py-1.5 hover:text-[#141413] transition-colors"
+                  >
+                    Instagram
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://www.facebook.com/ridefactorymons"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-block py-1.5 hover:text-[#141413] transition-colors"
+                  >
+                    Facebook
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://www.youtube.com/@ridefactorymons"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-block py-1.5 hover:text-[#141413] transition-colors"
+                  >
+                    YouTube
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://www.linkedin.com/company/ride-factory-mons"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-block py-1.5 hover:text-[#141413] transition-colors"
+                  >
+                    LinkedIn
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://x.com/ridefactorymons"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-block py-1.5 hover:text-[#141413] transition-colors"
+                  >
+                    X (Twitter)
+                  </a>
+                </li>
+              </ul>
               <button
                 onClick={onOpenBooking}
-                className="px-5 py-2.5 bg-[#141413] hover:bg-[#FF5A00] text-white text-sm font-medium rounded-lg transition-colors cursor-pointer"
+                className="px-5 py-3 bg-[#141413] hover:bg-[#FF5A00] text-white text-sm font-medium rounded-lg transition-colors cursor-pointer"
               >
                 Prendre rendez-vous
               </button>

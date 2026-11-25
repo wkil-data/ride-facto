@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, lazy, Suspense } from 'react';
 import { Header } from './components/Header';
 import { Hero } from './components/Hero';
 import { ServicesSection } from './components/ServicesSection';
@@ -11,12 +11,13 @@ import { BrandsSection } from './components/BrandsSection';
 import { AboutSection } from './components/AboutSection';
 import { LocationSection } from './components/LocationSection';
 import { Footer } from './components/Footer';
-import { BookingModal } from './components/BookingModal';
-import { BikesView } from './components/BikesView';
-import { ServicesDetailView } from './components/ServicesDetailView';
-import { ContactView } from './components/ContactView';
-import { BlogView } from './components/BlogView';
 import { WhatsAppButton } from './components/WhatsAppButton';
+
+const BookingModal = lazy(() => import('./components/BookingModal').then((m) => ({ default: m.BookingModal })));
+const BikesView = lazy(() => import('./components/BikesView').then((m) => ({ default: m.BikesView })));
+const ServicesDetailView = lazy(() => import('./components/ServicesDetailView').then((m) => ({ default: m.ServicesDetailView })));
+const ContactView = lazy(() => import('./components/ContactView').then((m) => ({ default: m.ContactView })));
+const BlogView = lazy(() => import('./components/BlogView').then((m) => ({ default: m.BlogView })));
 
 export default function App() {
   const [currentView, setCurrentView] = useState<'home' | 'services' | 'motos' | 'contact' | 'blog'>('home');
@@ -52,7 +53,7 @@ export default function App() {
     const seoMap: Record<string, { title: string; desc: string }> = {
       home: {
         title: 'Ride Factory Mons — Garage & Atelier Moto Multimarques',
-        desc: 'Atelier et garage moto à Mons : entretien, réparation, pneus, préparation tout-terrain et vente de motos toutes marques. Prenez rendez-vous au 0470/55.66.96.',
+        desc: 'Atelier et garage moto à Mons : entretien, réparation, pneus et préparation toutes marques. Prenez rendez-vous au 0470/55.66.96.',
       },
       services: {
         title: 'Entretien, Pneus & Réparation Moto à Mons | Ride Factory',
@@ -152,34 +153,36 @@ export default function App() {
           </>
         )}
 
-        {currentView === 'services' && (
-          <ServicesDetailView
-            onSelectServiceForBooking={(srv) => handleOpenBooking(srv)}
-            onNavigateHome={() => handleNavigate('home')}
-          />
-        )}
+        <Suspense fallback={<div className="min-h-screen bg-[#FAFAF8]" />}>
+          {currentView === 'services' && (
+            <ServicesDetailView
+              onSelectServiceForBooking={(srv) => handleOpenBooking(srv)}
+              onNavigateHome={() => handleNavigate('home')}
+            />
+          )}
 
-        {currentView === 'motos' && (
-          <BikesView
-            isAdmin={isAdmin}
-            onAdminLogout={handleAdminLogout}
-            onOpenBookingForBike={(bike) => handleOpenBooking(`Visite moto : ${bike}`)}
-            onNavigateHome={() => handleNavigate('home')}
-          />
-        )}
+          {currentView === 'motos' && (
+            <BikesView
+              isAdmin={isAdmin}
+              onAdminLogout={handleAdminLogout}
+              onOpenBookingForBike={(bike) => handleOpenBooking(`Visite moto : ${bike}`)}
+              onNavigateHome={() => handleNavigate('home')}
+            />
+          )}
 
-        {currentView === 'contact' && (
-          <ContactView
-            onNavigateHome={() => handleNavigate('home')}
-          />
-        )}
+          {currentView === 'contact' && (
+            <ContactView
+              onNavigateHome={() => handleNavigate('home')}
+            />
+          )}
 
-        {currentView === 'blog' && (
-          <BlogView
-            onOpenBooking={(srv) => handleOpenBooking(srv)}
-            onNavigateHome={() => handleNavigate('home')}
-          />
-        )}
+          {currentView === 'blog' && (
+            <BlogView
+              onOpenBooking={(srv) => handleOpenBooking(srv)}
+              onNavigateHome={() => handleNavigate('home')}
+            />
+          )}
+        </Suspense>
       </main>
 
       <Footer
@@ -191,11 +194,15 @@ export default function App() {
 
       <WhatsAppButton phoneNumber="32470556696" displayPhone="0470/55.66.96" />
 
-      <BookingModal
-        isOpen={bookingModalOpen}
-        onClose={() => setBookingModalOpen(false)}
-        preselectedService={preselectedBookingService}
-      />
+      {bookingModalOpen && (
+        <Suspense fallback={null}>
+          <BookingModal
+            isOpen={bookingModalOpen}
+            onClose={() => setBookingModalOpen(false)}
+            preselectedService={preselectedBookingService}
+          />
+        </Suspense>
+      )}
     </div>
   );
 }

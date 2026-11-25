@@ -168,9 +168,9 @@ export function ContactView({ onNavigateHome }: ContactViewProps) {
                 {bookingSubmitted ? (
                   <div className="py-10 text-center space-y-4">
                     <CheckCircle2 className="w-10 h-10 text-[#FF5A00] mx-auto" />
-                    <h3 className="font-heading font-bold text-2xl text-[#141413]">
+                    <h2 className="font-heading font-bold text-2xl text-[#141413]">
                       Demande transmise
-                    </h3>
+                    </h2>
                     <p className="text-sm text-[#6E6D6A] max-w-md mx-auto leading-relaxed">
                       Merci <strong className="text-[#141413]">{bookingData.prenom} {bookingData.nom}</strong>. Votre demande pour votre <strong className="text-[#141413]">{bookingData.motoMarque} {bookingData.motoModele}</strong> est enregistrée. Nous vous recontactons rapidement au {bookingData.telephone}.
                     </p>
@@ -216,9 +216,9 @@ export function ContactView({ onNavigateHome }: ContactViewProps) {
                     )}
 
                     <div>
-                      <h4 className="text-xs font-semibold text-[#141413] mb-3">
+                      <h2 className="text-xs font-semibold text-[#141413] mb-3">
                         01. Coordonnées
-                      </h4>
+                      </h2>
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                         <input
                           type="text"
@@ -256,9 +256,9 @@ export function ContactView({ onNavigateHome }: ContactViewProps) {
                     </div>
 
                     <div className="pt-4 border-t border-[#E6E4DE]">
-                      <h4 className="text-xs font-semibold text-[#141413] mb-3">
+                      <h2 className="text-xs font-semibold text-[#141413] mb-3">
                         02. Machine
-                      </h4>
+                      </h2>
                       <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                         <input
                           type="text"
@@ -300,9 +300,9 @@ export function ContactView({ onNavigateHome }: ContactViewProps) {
                     </div>
 
                     <div className="pt-4 border-t border-[#E6E4DE]">
-                      <h4 className="text-xs font-semibold text-[#141413] mb-3">
+                      <h2 className="text-xs font-semibold text-[#141413] mb-3">
                         03. Intervention souhaitée
-                      </h4>
+                      </h2>
                       <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
                         {(['Entretien', 'Réparation', 'Pneus', 'Diagnostic', 'Préparation', 'Autre'] as const).map((t) => (
                           <button
@@ -358,9 +358,9 @@ export function ContactView({ onNavigateHome }: ContactViewProps) {
                 {sentMessage ? (
                   <div className="py-10 text-center space-y-3">
                     <CheckCircle2 className="w-10 h-10 text-[#FF5A00] mx-auto" />
-                    <h3 className="font-heading font-bold text-2xl text-[#141413]">
+                    <h2 className="font-heading font-bold text-2xl text-[#141413]">
                       Message envoyé
-                    </h3>
+                    </h2>
                     <p className="text-sm text-[#6E6D6A]">
                       L’atelier vous répondra dans les plus brefs délais.
                     </p>

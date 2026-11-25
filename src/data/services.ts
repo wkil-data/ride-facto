@@ -1,8 +1,8 @@
 import { ServiceItem } from './types';
-import engineImg from '../assets/images/engine_preparation_detail_1791293915497.jpg';
+import engineImg from '../assets/images/engine_entretien_detail_1795609134330.jpg';
 import heroWorkshopImg from '../assets/images/hero_enduro_workshop_1791293882530.jpg';
-import dirtActionImg from '../assets/images/dirt_offroad_action_1791293893287.jpg';
-import tiresMousseImg from '../assets/images/workshop_tires_mousse_1791293904780.jpg';
+import dirtActionImg from '../assets/images/enduro_forest_action_1795609134567.jpg';
+import tiresMousseImg from '../assets/images/workshop_tires_stand_1795609135928.jpg';
 
 export const SERVICES_DATA: ServiceItem[] = [
   {

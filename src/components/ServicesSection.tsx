@@ -42,6 +42,8 @@ export function ServicesSection({ onSelectServiceForBooking }: ServicesSectionPr
                   <img
                     src={service.image}
                     alt={`Service ${service.title} - Ride Factory Mons`}
+                    loading="lazy"
+                    decoding="async"
                     referrerPolicy="no-referrer"
                     onError={(e) => {
                       (e.target as HTMLImageElement).src = '/images/hero_enduro_workshop.jpg';
@@ -81,14 +83,14 @@ export function ServicesSection({ onSelectServiceForBooking }: ServicesSectionPr
               <div className="px-7 sm:px-8 pb-7 pt-2 flex items-center justify-between gap-4">
                 <button
                   onClick={() => setActiveModalService(service)}
-                  className="text-sm font-medium text-[#6E6D6A] hover:text-[#141413] transition-colors cursor-pointer py-1 whitespace-nowrap shrink-0"
+                  className="text-sm font-medium text-[#6E6D6A] hover:text-[#141413] transition-colors cursor-pointer py-2.5 min-h-[44px] whitespace-nowrap shrink-0"
                 >
                   Détails techniques →
                 </button>
 
                 <button
                   onClick={() => onSelectServiceForBooking(service.title)}
-                  className="inline-flex items-center gap-1.5 px-4 py-2 bg-[#F2F1ED] hover:bg-[#FF5A00] text-[#141413] hover:text-white text-sm font-medium rounded-lg transition-colors duration-150 cursor-pointer whitespace-nowrap shrink-0"
+                  className="inline-flex items-center gap-1.5 px-4 py-2.5 min-h-[44px] bg-[#F2F1ED] hover:bg-[#FF5A00] text-[#141413] hover:text-white text-sm font-medium rounded-lg transition-colors duration-150 cursor-pointer whitespace-nowrap shrink-0"
                 >
                   <span>Réserver</span>
                   <ArrowUpRight className="w-3.5 h-3.5" />

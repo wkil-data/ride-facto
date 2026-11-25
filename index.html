@@ -6,17 +6,21 @@
     <title>Ride Factory Mons — Garage &amp; Atelier Moto Multimarques</title>
     <meta
       name="description"
-      content="Atelier et garage moto à Mons : entretien, réparation, pneus, préparation tout-terrain et vente de motos toutes marques. Prenez rendez-vous au 0470/55.66.96."
+      content="Atelier et garage moto à Mons : entretien, réparation, pneus et préparation toutes marques. Prenez rendez-vous au 0470/55.66.96."
     />
 
     <!-- Favicon & Touch Icons -->
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="apple-touch-icon" href="/favicon.svg" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <meta name="theme-color" content="#FAFAF8" />
+    <meta name="application-name" content="Ride Factory" />
 
     <!-- SEO & Crawling Directives -->
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
-    <meta name="author" content="Ride Factory Mons" />
+    <meta name="author" content="Ride Factory" />
     <meta
       name="keywords"
       content="garage moto mons, atelier moto mons, entretien moto mons, réparation moto hainaut, mécanicien moto toutes marques mons, vente moto occasion mons, enduro trail motocross adventure belgique, montage pneu moto bib mousse mons, préparation suspension moto, ktm husqvarna gasgas sherco beta yamaha honda kawasaki suzuki bmw, petite rue des prés 1 mons"
@@ -24,6 +28,7 @@
     <link rel="canonical" href="https://ride-factory.be/" />
     <link rel="alternate" hreflang="fr-BE" href="https://ride-factory.be/" />
     <link rel="alternate" hreflang="fr" href="https://ride-factory.be/" />
+    <link rel="alternate" hreflang="x-default" href="https://ride-factory.be/" />
 
     <!-- Local SEO & Geolocation (Mons, Hainaut, Belgique) -->
     <meta name="geo.region" content="BE-WHT" />
@@ -39,14 +44,14 @@
     <meta property="og:title" content="Ride Factory Mons — Garage &amp; Atelier Moto Multimarques" />
     <meta
       property="og:description"
-      content="Atelier et garage moto à Mons : entretien, réparation, pneus, préparation tout-terrain et vente de motos toutes marques. Prenez rendez-vous au 0470/55.66.96."
+      content="Atelier et garage moto à Mons : entretien, réparation, pneus et préparation toutes marques. Prenez rendez-vous au 0470/55.66.96."
     />
     <meta property="og:image" content="https://ride-factory.be/og-image.jpg" />
     <meta property="og:image:secure_url" content="https://ride-factory.be/og-image.jpg" />
     <meta property="og:image:type" content="image/jpeg" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="Ride Factory Mons — Atelier et garage moto multimarques" />
+    <meta property="og:image:alt" content="Ride Factory — Atelier et garage moto multimarques à Mons" />
     <link rel="image_src" href="https://ride-factory.be/og-image.jpg" />
 
     <!-- Twitter / X Card -->
@@ -55,37 +60,10 @@
     <meta name="twitter:title" content="Ride Factory Mons — Garage &amp; Atelier Moto Multimarques" />
     <meta
       name="twitter:description"
-      content="Atelier et garage moto à Mons : entretien, réparation, pneus, préparation tout-terrain et vente de motos toutes marques. Prenez rendez-vous au 0470/55.66.96."
+      content="Atelier et garage moto à Mons : entretien, réparation, pneus et préparation toutes marques. Prenez rendez-vous au 0470/55.66.96."
     />
     <meta name="twitter:image" content="https://ride-factory.be/og-image.jpg" />
-    <meta name="twitter:image:alt" content="Ride Factory Atelier Moto Mons" />
-
-    <!-- Dynamic origin adaptation for non-production preview domains -->
-    <script>
-      (function () {
-        try {
-          var origin = window.location.origin;
-          if (origin && !origin.includes('ride-factory.be')) {
-            var fullImg = origin + '/og-image.jpg';
-            var fullUrl = origin + window.location.pathname;
-            var metaOg = document.querySelector('meta[property="og:image"]');
-            var metaOgSec = document.querySelector('meta[property="og:image:secure_url"]');
-            var metaOgUrl = document.querySelector('meta[property="og:url"]');
-            var metaTw = document.querySelector('meta[name="twitter:image"]');
-            var metaTwUrl = document.querySelector('meta[name="twitter:url"]');
-            var linkImg = document.querySelector('link[rel="image_src"]');
-            var canonical = document.querySelector('link[rel="canonical"]');
-            if (metaOg) metaOg.setAttribute('content', fullImg);
-            if (metaOgSec) metaOgSec.setAttribute('content', fullImg);
-            if (metaOgUrl) metaOgUrl.setAttribute('content', fullUrl);
-            if (metaTw) metaTw.setAttribute('content', fullImg);
-            if (metaTwUrl) metaTwUrl.setAttribute('content', fullUrl);
-            if (linkImg) linkImg.setAttribute('href', fullImg);
-            if (canonical) canonical.setAttribute('href', fullUrl);
-          }
-        } catch (e) {}
-      })();
-    </script>
+    <meta name="twitter:image:alt" content="Ride Factory — Atelier Moto Mons" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -94,158 +72,215 @@
       rel="stylesheet"
     />
 
-    <!-- Schema.org Structured Data (MotorcycleRepair + WebSite + FAQPage) -->
+    <!-- Schema.org Structured Data: MotorcycleRepair -->
     <script type="application/ld+json">
-      [
-        {
-          "@context": "https://schema.org",
-          "@type": ["MotorcycleRepair", "AutoRepair"],
-          "@id": "https://ride-factory.be/#garage",
-          "name": "Ride Factory",
-          "alternateName": "Ride Factory Mons",
-          "additionalType": "https://schema.org/MotorcycleDealer",
-          "image": "https://ride-factory.be/og-image.jpg",
-          "logo": "https://ride-factory.be/logo.svg",
-          "url": "https://ride-factory.be/",
-          "email": "info@ride-factory.be",
-          "telephone": "+32470556696",
-          "description": "Atelier et garage moto multimarques à Mons en Belgique : entretien, réparation mécanique, montage pneus & bib mousse, préparation enduro/trail/motocross et vente de motos révisées.",
-          "priceRange": "€€",
-          "currenciesAccepted": "EUR",
-          "paymentAccepted": "Cash, Credit Card, Bancontact, Instant Transfer",
-          "hasMap": "https://www.google.com/maps/dir/?api=1&destination=Petite+Rue+des+Pr%C3%A9s+1+7000+Mons+Belgique",
-          "address": {
-            "@type": "PostalAddress",
-            "streetAddress": "Petite Rue des Prés 1",
-            "addressLocality": "Mons",
-            "addressRegion": "Hainaut",
-            "postalCode": "7000",
-            "addressCountry": "BE"
-          },
-          "geo": {
-            "@type": "GeoCoordinates",
-            "latitude": 50.4542,
-            "longitude": 3.9523
-          },
-          "openingHoursSpecification": [
-            {
-              "@type": "OpeningHoursSpecification",
-              "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-              "opens": "09:00",
-              "closes": "18:00"
-            }
-          ],
-          "contactPoint": {
-            "@type": "ContactPoint",
-            "telephone": "+32470556696",
-            "email": "info@ride-factory.be",
-            "contactType": "customer service",
-            "availableLanguage": ["French"]
-          },
-          "areaServed": [
-            { "@type": "City", "name": "Mons" },
-            { "@type": "City", "name": "Saint-Ghislain" },
-            { "@type": "City", "name": "La Louvière" },
-            { "@type": "City", "name": "Soignies" },
-            { "@type": "City", "name": "Binche" },
-            { "@type": "City", "name": "Tournai" },
-            { "@type": "City", "name": "Charleroi" },
-            { "@type": "AdministrativeArea", "name": "Hainaut" },
-            { "@type": "AdministrativeArea", "name": "Wallonie" },
-            { "@type": "Country", "name": "Belgique" },
-            { "@type": "AdministrativeArea", "name": "Hauts-de-France" }
-          ],
-          "hasOfferCatalog": {
-            "@type": "OfferCatalog",
-            "name": "Prestations Atelier Moto Ride Factory",
-            "itemListElement": [
-              {
-                "@type": "Offer",
-                "itemOffered": {
-                  "@type": "Service",
-                  "name": "Entretien & Révision Moto Multimarques",
-                  "description": "Vidange, filtres, bougies, jeu aux soupapes, kits chaîne, freins et contrôle complet."
-                }
-              },
-              {
-                "@type": "Offer",
-                "itemOffered": {
-                  "@type": "Service",
-                  "name": "Montage Pneumatiques & Bib Mousse",
-                  "description": "Montage pneus route, trail, enduro, cross, chambres renforcées, bib mousse et Tubliss."
-                }
-              },
-              {
-                "@type": "Offer",
-                "itemOffered": {
-                  "@type": "Service",
-                  "name": "Réparation Moteur, Électricité & Diagnostic",
-                  "description": "Réfection haut/bas moteur 2T et 4T, embrayage, faisceau électrique et diagnostic électronique."
-                }
-              },
-              {
-                "@type": "Offer",
-                "itemOffered": {
-                  "@type": "Service",
-                  "name": "Préparation Tout-Terrain, Suspensions & Rallye Raid",
-                  "description": "Préparation châssis, ressorts, protections et équipements rallye pour enduro, motocross et adventure."
-                }
-              }
-            ]
+      {
+        "@context": "https://schema.org",
+        "@type": "MotorcycleRepair",
+        "@id": "https://ride-factory.be/#garage",
+        "name": "Ride Factory",
+        "alternateName": "Ride Factory Mons",
+        "image": "https://ride-factory.be/og-image.jpg",
+        "logo": "https://ride-factory.be/logo.png",
+        "url": "https://ride-factory.be/",
+        "email": "info@ride-factory.be",
+        "telephone": "+32470556696",
+        "description": "Atelier et garage moto multimarques à Mons en Belgique : entretien, réparation mécanique, montage pneus & bib mousse, préparation enduro/trail/motocross et vente de motos révisées.",
+        "priceRange": "€€",
+        "currenciesAccepted": "EUR",
+        "paymentAccepted": "Cash, Credit Card, Bancontact, Instant Transfer",
+        "hasMap": "https://www.google.com/maps/dir/?api=1&destination=Petite+Rue+des+Pr%C3%A9s+1+7000+Mons+Belgique",
+        "sameAs": [
+          "https://www.instagram.com/ridefactory.mons",
+          "https://www.facebook.com/ridefactorymons",
+          "https://www.youtube.com/@ridefactorymons",
+          "https://www.linkedin.com/company/ride-factory-mons",
+          "https://x.com/ridefactorymons"
+        ],
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Petite Rue des Prés 1",
+          "addressLocality": "Mons",
+          "addressRegion": "Hainaut",
+          "postalCode": "7000",
+          "addressCountry": "BE"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": 50.4542,
+          "longitude": 3.9523
+        },
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+            "opens": "09:00",
+            "closes": "18:00"
           }
+        ],
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "telephone": "+32470556696",
+          "email": "info@ride-factory.be",
+          "contactType": "customer service",
+          "availableLanguage": ["French"]
         },
-        {
-          "@context": "https://schema.org",
-          "@type": "WebSite",
-          "@id": "https://ride-factory.be/#website",
-          "url": "https://ride-factory.be/",
-          "name": "Ride Factory Mons",
-          "inLanguage": "fr-BE",
-          "publisher": { "@id": "https://ride-factory.be/#garage" }
-        },
-        {
-          "@context": "https://schema.org",
-          "@type": "FAQPage",
-          "mainEntity": [
-            {
-              "@type": "Question",
-              "name": "Où se trouve l'atelier moto Ride Factory à Mons ?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "L'atelier Ride Factory est situé au Petite Rue des Prés 1, 7000 Mons, en Belgique, avec un accès direct depuis les autoroutes E19/E42 et stationnement facile pour remorques et camionnettes."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "Quelles marques de motos entretenez-vous chez Ride Factory ?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Nous sommes spécialisés en KTM, Husqvarna, GASGAS, Sherco, Beta, Honda, Yamaha, Kawasaki et Suzuki, et nous prenons également en charge toutes les autres marques (BMW, Ducati, Triumph, TM Racing, Fantic, etc.)."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "Quels sont vos horaires et comment contacter Ride Factory ?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "L'atelier est ouvert du lundi au samedi de 09h00 à 18h00. Vous pouvez nous contacter par téléphone ou WhatsApp au 0470/55.66.96, ou par email à info@ride-factory.be."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "Proposez-vous des motos d'occasion révisées à vendre à Mons ?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Oui, Ride Factory propose régulièrement des motos enduro, trail, cross et adventure entièrement révisées sur 32 points et prêtes à rouler dans notre showroom de Mons."
-              }
+        "areaServed": [
+          { "@type": "City", "name": "Mons" },
+          { "@type": "City", "name": "Saint-Ghislain" },
+          { "@type": "City", "name": "La Louvière" },
+          { "@type": "City", "name": "Soignies" },
+          { "@type": "City", "name": "Binche" },
+          { "@type": "City", "name": "Tournai" },
+          { "@type": "City", "name": "Charleroi" },
+          { "@type": "AdministrativeArea", "name": "Hainaut" },
+          { "@type": "AdministrativeArea", "name": "Wallonie" },
+          { "@type": "Country", "name": "Belgique" }
+        ]
+      }
+    </script>
+
+    <!-- Schema.org Structured Data: WebSite -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "@id": "https://ride-factory.be/#website",
+        "url": "https://ride-factory.be/",
+        "name": "Ride Factory",
+        "alternateName": ["Ride Factory Mons", "ride-factory.be"],
+        "inLanguage": "fr-BE"
+      }
+    </script>
+
+    <!-- Schema.org Structured Data: FAQPage -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Où se trouve l'atelier moto Ride Factory à Mons ?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "L'atelier Ride Factory est situé au Petite Rue des Prés 1, 7000 Mons, en Belgique, avec un accès direct depuis les autoroutes E19/E42 et stationnement facile pour remorques et camionnettes."
             }
-          ]
-        }
-      ]
+          },
+          {
+            "@type": "Question",
+            "name": "Quelles marques de motos entretenez-vous chez Ride Factory ?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Nous sommes spécialisés en KTM, Husqvarna, GASGAS, Sherco, Beta, Honda, Yamaha, Kawasaki et Suzuki, et nous prenons également en charge toutes les autres marques (BMW, Ducati, Triumph, TM Racing, Fantic, etc.)."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Quels sont vos horaires et comment contacter Ride Factory ?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "L'atelier est ouvert du lundi au samedi de 09h00 à 18h00. Vous pouvez nous contacter par téléphone ou WhatsApp au 0470/55.66.96, ou par email à info@ride-factory.be."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Proposez-vous des motos d'occasion révisées à vendre à Mons ?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Oui, Ride Factory propose régulièrement des motos enduro, trail, cross et adventure entièrement révisées sur 32 points et prêtes à rouler dans notre showroom de Mons."
+            }
+          }
+        ]
+      }
     </script>
   </head>
   <body class="bg-[#FAFAF8] text-[#141413] antialiased selection:bg-[#FF5A00] selection:text-white">
-    <div id="root"></div>
+    <div id="root">
+      <main class="max-w-4xl mx-auto px-6 py-16 text-[#141413]">
+        <header>
+          <p>Ride Factory — Atelier moto indépendant à Mons</p>
+          <h1>Garage et atelier moto multimarques à Mons — Ride Factory</h1>
+          <p>
+            Enduro, Trail, Motocross et Adventure : notre terrain de jeu commence là où la route s’arrête. Situé Petite Rue des Prés 1 à 7000 Mons en Belgique, Ride Factory accueille votre moto pour son entretien courant, ses réparations mécaniques, le montage de pneus et bib mousse ainsi que la préparation tout-terrain.
+          </p>
+        </header>
+
+        <section>
+          <h2>Prestations d’atelier moto à Mons</h2>
+
+          <h3>01. Entretien et révision périodique</h3>
+          <p>
+            Chaque entretien respecte un protocole rigoureux en 32 points selon les tolérances constructeur : vidanges moteur et boîte avec huiles haute viscosité, remplacement des filtres à huile et filtres à air préparés, bougies, purge des circuits de freinage haute température, contrôle et tension de transmission, vérification complète des jeux, serrages au couple et roulements.
+          </p>
+
+          <h3>02. Réparation mécanique et diagnostic électronique</h3>
+          <p>
+            Nous prenons en charge le diagnostic électronique multimarques approfondi, la réfection moteur 2-temps et 4-temps (piston, segmentation, bielle, distribution, boîte de vitesses), la partie cycle (fourches, amortisseurs, biellettes, bras oscillant, roulements de colonne et de roues), le freinage ainsi que l’électricité et le faisceau.
+          </p>
+
+          <h3>03. Préparation Enduro, Trail, Motocross et Adventure</h3>
+          <p>
+            Ride Factory optimise votre machine selon votre gabarit et votre pratique : calibration personnalisée des suspensions, protections moteur et radiateurs, platines et tours de navigation rallye raid, cartographies et échappements.
+          </p>
+
+          <h3>04. Montage pneumatiques, chambres renforcées et bib mousse</h3>
+          <p>
+            Spécialiste du montage tout-terrain à Mons sur machine dédiée : pneus enduro FIM, profils trail et adventure 50/50, chambres à air renforcées 4 mm, montage de bib mousse sans pincement avec lubrification complète, double gripster et équilibrage dynamique.
+          </p>
+        </section>
+
+        <section>
+          <h2>Pourquoi choisir Ride Factory à Mons</h2>
+          <h3>Prise en charge rapide en Hainaut</h3>
+          <p>
+            Accès direct depuis les autoroutes E19 et E42 avec stationnement pratique devant l’atelier pour les camionnettes et les remorques.
+          </p>
+          <h3>Devis transparent avant chaque intervention</h3>
+          <p>
+            Aucun travail n’est engagé sans diagnostic clair ni accord préalable sur le budget. Les pièces usées remplacées restent visibles à la restitution de votre moto.
+          </p>
+          <h3>Expertise toutes marques et motos à vendre</h3>
+          <p>
+            Nous travaillons quotidiennement sur KTM, Husqvarna, GASGAS, Sherco, Beta, Yamaha, Honda, Kawasaki et Suzuki, ainsi que sur toutes les autres marques (BMW, Ducati, Triumph, TM Racing, Fantic). Notre showroom de Mons propose également des motos d’occasion révisées et prêtes à rouler.
+          </p>
+        </section>
+
+        <section>
+          <h2>Questions fréquentes et zone d’intervention en Hainaut</h2>
+          <h3>Où se situe votre garage moto à Mons et comment y accéder ?</h3>
+          <p>
+            Ride Factory est implanté Petite Rue des Prés 1 à 7000 Mons, à proximité immédiate des autoroutes E19 et E42. Nos clients viennent de toute la région de Mons, Saint-Ghislain, Boussu, Jemappes, Quaregnon, La Louvière, Soignies, Binche, Tournai, Charleroi ainsi que du nord de la France. Un espace de stationnement dédié devant l’atelier permet de décharger facilement votre moto depuis une remorque ou une camionnette.
+          </p>
+          <h3>Faut-il prendre rendez-vous pour un entretien ou un montage de pneus ?</h3>
+          <p>
+            Oui, la prise de rendez-vous permet de réserver le pont élévateur et de préparer les consommables adaptés à votre moto avant votre arrivée. Pour un montage de pneu tout-terrain ou de bib mousse, l’intervention est réalisée en trente à quarante-cinq minutes sur rendez-vous. Contactez notre équipe du lundi au samedi de 09h00 à 18h00.
+          </p>
+          <h3>Proposez-vous des motos d’occasion révisées à vendre ?</h3>
+          <p>
+            Notre showroom de Mons propose régulièrement des motos d’enduro, de trail, de motocross et d’adventure soigneusement contrôlées sur trente-deux points techniques, avec historique d’entretien vérifié, consommables neufs ou vérifiés et possibilité d’essai ou de reprise.
+          </p>
+        </section>
+
+        <section>
+          <h2>Coordonnées, horaires et rendez-vous</h2>
+          <p>
+            Adresse : Petite Rue des Prés 1, 7000 Mons, Belgique. Horaires : du lundi au samedi de 09h00 à 18h00. Téléphone et WhatsApp : <a href="tel:+32470556696">0470/55.66.96</a>. Email : <a href="mailto:info@ride-factory.be">info@ride-factory.be</a>.
+          </p>
+        </section>
+
+        <footer>
+          <h3>Suivre Ride Factory</h3>
+          <ul>
+            <li><a href="https://www.instagram.com/ridefactory.mons" rel="noopener noreferrer">Instagram</a></li>
+            <li><a href="https://www.facebook.com/ridefactorymons" rel="noopener noreferrer">Facebook</a></li>
+            <li><a href="https://www.youtube.com/@ridefactorymons" rel="noopener noreferrer">YouTube</a></li>
+            <li><a href="https://www.linkedin.com/company/ride-factory-mons" rel="noopener noreferrer">LinkedIn</a></li>
+            <li><a href="https://x.com/ridefactorymons" rel="noopener noreferrer">X (Twitter)</a></li>
+          </ul>
+        </footer>
+      </main>
+    </div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

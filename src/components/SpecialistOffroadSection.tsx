@@ -1,4 +1,4 @@
-import dirtOffroadImg from '../assets/images/dirt_offroad_action_1791293893287.jpg';
+import dirtOffroadImg from '../assets/images/enduro_forest_action_1795609134567.jpg';
 
 interface SpecialistOffroadSectionProps {
   onOpenBooking: () => void;

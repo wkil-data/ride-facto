@@ -36,8 +36,8 @@ export function Header({ currentView, onNavigate, onOpenBooking }: HeaderProps) 
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-colors duration-200 border-b ${
         isScrolled
-          ? 'bg-[#FAFAF8]/92 backdrop-blur-md border-[#E6E4DE]'
-          : 'bg-[#FAFAF8]/80 backdrop-blur-sm border-transparent'
+          ? 'bg-[#FAFAF8]/94 backdrop-blur-md border-[#E6E4DE]'
+          : 'bg-[#FAFAF8]/85 backdrop-blur-sm border-transparent'
       }`}
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-8">
@@ -47,10 +47,10 @@ export function Header({ currentView, onNavigate, onOpenBooking }: HeaderProps) 
           className="focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FF5A00] rounded-lg group cursor-pointer whitespace-nowrap shrink-0"
           aria-label="Ride Factory Accueil"
         >
-          <Logo size="sm" />
+          <Logo size="sm" tone="dark" />
         </button>
 
-        {/* Zone 2: 5 Clean Single-Line Nav Links */}
+        {/* Zone 2: Clean Single-Line Nav Links */}
         <nav className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => {
             const isActive = currentView === link.view;

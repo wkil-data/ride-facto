@@ -22,7 +22,7 @@ interface BikesViewProps {
   onNavigateHome?: () => void;
 }
 
-const STORAGE_KEY = 'ride_factory_motorbikes_catalog_v3';
+const STORAGE_KEY = 'ride_factory_motorbikes_catalog_v5';
 
 export function BikesView({
   isAdmin,
